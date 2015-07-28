@@ -1,5 +1,6 @@
 package br.com.alexpfx.android.lib.network;
 
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
@@ -57,7 +58,7 @@ public class NetworkMainActivity extends ActionBarActivity {
 
     //Test
     public void onScanClick (){
-        final WifiNetwork wifiNetwork = new WifiNetwork(getApplicationContext());
+        final WifiNetwork wifiNetwork = new WifiNetwork((WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE));
         final InetAddress inetAddress = wifiNetwork.getInetAddress();
         System.out.println(inetAddress.getHostAddress());
         Network n = new Network();

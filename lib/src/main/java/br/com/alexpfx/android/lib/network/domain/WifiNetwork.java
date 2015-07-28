@@ -15,9 +15,8 @@ public class WifiNetwork {
     private WifiManager wifiManager;
 
 
-    public WifiNetwork(Context context) {
-        this.context = context;
-        wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+    public WifiNetwork(WifiManager manager) {
+        this.wifiManager = manager;
     }
 
 
