@@ -1,13 +1,16 @@
 package br.com.alexpfx.android.lib.network;
 
-import android.net.wifi.WifiInfo;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import br.com.alexpfx.android.lib.network.domain.WifiService;
+import br.com.alexpfx.android.lib.network.domain.Network;
+import br.com.alexpfx.android.lib.network.domain.WifiNetwork;
+
+import java.net.InetAddress;
+import java.util.List;
 
 
 public class NetworkMainActivity extends ActionBarActivity {
@@ -52,12 +55,13 @@ public class NetworkMainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
 
-
+    //Test
     public void onScanClick (){
-        final WifiService wifiService = new WifiService(getApplicationContext());
-        final WifiInfo wifiInfo = wifiService.getWifiInfo();
-        System.out.println();
-
+        final WifiNetwork wifiNetwork = new WifiNetwork(getApplicationContext());
+        final InetAddress inetAddress = wifiNetwork.getInetAddress();
+        System.out.println(inetAddress.getHostAddress());
+        Network n = new Network();
+        final List<InetAddress> networkInetAddresses = n.getIpAddressRange(inetAddress);
     }
 
     public View getView (int resId){

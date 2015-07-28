@@ -4,30 +4,27 @@ import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 
+import java.net.InetAddress;
+
 /**
  * Created by alexandre on 27/07/15.
  */
-public class WifiService {
+public class WifiNetwork {
 
     private Context context;
     private WifiManager wifiManager;
 
-    public WifiService(Context context) {
+
+    public WifiNetwork(Context context) {
         this.context = context;
         wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
     }
 
 
-    public WifiInfo getWifiInfo (){
-        return wifiManager.getConnectionInfo();
+    public InetAddress getInetAddress() {
+        final WifiInfo connectionInfo = wifiManager.getConnectionInfo();
+        return IpUtils.intToInetAddress(connectionInfo.getIpAddress());
     }
-
-
-
-
-
-
-
 
 
 }
