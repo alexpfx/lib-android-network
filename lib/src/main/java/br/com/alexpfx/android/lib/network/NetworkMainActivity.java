@@ -81,7 +81,7 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
 
         try {
             final InetAddress byName = InetAddress.getByName("192.168.25.119");
-            PortScannerUseCase u = new RangePortScannerUseCaseImpl(byName, 100, 1000, 600);
+            PortScannerUseCase u = new RangePortScannerUseCaseImpl(byName, 2, 65123, 40, 50);
             u.execute(this);
         } catch (UnknownHostException e) {
 
@@ -106,7 +106,7 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
 
     @Override
     public void onUpdateStatus(double percent) {
-        System.out.format("%.2f%s\n", percent,"%");
+//        System.out.format("%.2f%s\n", percent,"%");
     }
 
     @Override
