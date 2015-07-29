@@ -80,6 +80,7 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
         try {
             final InetAddress byName = InetAddress.getByName("192.168.25.119");
             PortScannerUseCase u = new RangePortScannerUseCaseImpl(byName, 100, 9000, 100);
+            u.execute();
         } catch (UnknownHostException e) {
 
         }
