@@ -1,4 +1,7 @@
-package br.com.alexpfx.android.lib.network.domain;
+package br.com.alexpfx.android.lib.network.domain.usecases;
+
+import br.com.alexpfx.android.lib.network.domain.Interactor;
+import br.com.alexpfx.android.lib.network.domain.PortStatus;
 
 import java.net.InetAddress;
 
