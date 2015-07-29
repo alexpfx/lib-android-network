@@ -53,23 +53,23 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
         if (id == R.id.action_settings) {
             return true;
 
-       }
+        }
 
         return super.onOptionsItemSelected(item);
     }
 
     //Test
-    public void onScanClick (){
+    public void onScanClick() {
         final WifiNetwork wifiNetwork = new WifiNetwork((WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE));
         final InetAddress inetAddress = wifiNetwork.getInetAddress();
         System.out.println(inetAddress.getHostAddress());
         Network n = new Network();
         final List<InetAddress> networkInetAddresses = n.getIpAddressRange(inetAddress);
-        new NetworkScannerUseCaseImpl().execute(networkInetAddresses, this);
+        new NetworkScannerUseCaseImpl().execute(networkInetAddresses, 8008, 250, this);
 
     }
 
-    public View getView (int resId){
+    public View getView(int resId) {
         return findViewById(resId);
     }
 
