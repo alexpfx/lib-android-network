@@ -20,7 +20,6 @@ public class CheckPortUseCaseImpl implements CheckPortUseCase {
         this.timeout = timeout;
         this.port = port;
         this.callback = callback;
-
         threadExecutor.execute(this);
     }
 
@@ -30,6 +29,7 @@ public class CheckPortUseCaseImpl implements CheckPortUseCase {
         try {
             s.connect(new InetSocketAddress(inetAddress, port), timeout);
             s.close();
+            System.out.println(inetAddress);
             callback.onStatus("open");
         } catch (IOException e) {
             callback.onError(e);

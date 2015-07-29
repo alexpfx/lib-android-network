@@ -1,5 +1,7 @@
 package br.com.alexpfx.android.lib.network.domain;
 
+import android.util.Log;
+
 import java.net.InetAddress;
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +9,7 @@ import java.util.List;
 /**
  * Created by alexandre on 28/07/15.
  */
-public class NetworkScannerUseCaseImpl implements NetworkScannerUseCase {
+public class NetworkScannerUseCaseImpl implements NetworkScannerUseCase, CheckPortUseCase.Callback {
 
     private List<InetAddress> inetAddressList;
 
@@ -24,14 +26,27 @@ public class NetworkScannerUseCaseImpl implements NetworkScannerUseCase {
 
     }
 
+
+
     @Override
     public void execute(List<InetAddress> inetAddressList, Callback callback) {
         this.inetAddressList = inetAddressList;
-        threadExecutor.execute(this);
         for (InetAddress inetAddress:inetAddressList){
-
-
+            CheckPortUseCase c = new CheckPortUseCaseImpl();
+            c.execute(threadExecutor, inetAddress, 220, 8008, this);
         }
+        System.out.println("end");
+
+    }
+
+    @Override
+    public void onStatus(String s) {
+        System.out.println(s);
+
+    }
+
+    @Override
+    public void onError(Throwable t) {
 
     }
 }

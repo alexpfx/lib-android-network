@@ -8,13 +8,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import br.com.alexpfx.android.lib.network.domain.Network;
+import br.com.alexpfx.android.lib.network.domain.NetworkScannerUseCase;
+import br.com.alexpfx.android.lib.network.domain.NetworkScannerUseCaseImpl;
 import br.com.alexpfx.android.lib.network.domain.WifiNetwork;
 
 import java.net.InetAddress;
 import java.util.List;
 
 
-public class NetworkMainActivity extends ActionBarActivity {
+public class NetworkMainActivity extends ActionBarActivity implements NetworkScannerUseCase.Callback {
 
     private Button button;
 
@@ -63,9 +65,16 @@ public class NetworkMainActivity extends ActionBarActivity {
         System.out.println(inetAddress.getHostAddress());
         Network n = new Network();
         final List<InetAddress> networkInetAddresses = n.getIpAddressRange(inetAddress);
+        new NetworkScannerUseCaseImpl().execute(networkInetAddresses, this);
+
     }
 
     public View getView (int resId){
         return findViewById(resId);
+    }
+
+    @Override
+    public void onResultReceived(String result) {
+        System.out.println(result);
     }
 }
