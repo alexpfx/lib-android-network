@@ -9,17 +9,23 @@ import java.net.Socket;
  * Created by alexandre on 28/07/15.
  */
 public class CheckPortUseCaseImpl implements CheckPortUseCase {
+
     private InetAddress inetAddress;
     private int timeout;
     private int port;
     private Callback callback;
+    private ThreadExecutor threadExecutor;
 
-    @Override
-    public void execute(ThreadExecutor threadExecutor, InetAddress inetAddress, int timeout, int port, Callback callback) {
+    public CheckPortUseCaseImpl(ThreadExecutor threadExecutor, InetAddress inetAddress, int port, int timeout, Callback callback) {
         this.inetAddress = inetAddress;
         this.timeout = timeout;
         this.port = port;
         this.callback = callback;
+        this.threadExecutor = threadExecutor;
+    }
+
+    @Override
+    public void execute() {
         threadExecutor.execute(this);
     }
 
@@ -29,11 +35,10 @@ public class CheckPortUseCaseImpl implements CheckPortUseCase {
         try {
             s.connect(new InetSocketAddress(inetAddress, port), timeout);
             s.close();
-            System.out.println(inetAddress);
-            callback.onStatus("open");
         } catch (IOException e) {
-            callback.onError(e);
+            callback.onStatus(PortStatus.CLOSED, inetAddress, port);
         }
+        callback.onStatus(PortStatus.OPEN, inetAddress, port);
 
     }
 }

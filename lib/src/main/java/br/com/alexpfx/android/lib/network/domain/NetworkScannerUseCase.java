@@ -9,7 +9,7 @@ import java.util.ListIterator;
  */
 public interface NetworkScannerUseCase extends Interactor {
 
-    void execute (List <InetAddress> inetAddressList, Callback callback);
+    void execute (List <InetAddress> inetAddressList, int port, int timeout, Callback callback);
 
 
 
