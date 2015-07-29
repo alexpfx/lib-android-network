@@ -7,31 +7,39 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import br.com.alexpfx.android.lib.network.domain.Network;
-import br.com.alexpfx.android.lib.network.domain.NetworkScannerUseCase;
-import br.com.alexpfx.android.lib.network.domain.NetworkScannerUseCaseImpl;
-import br.com.alexpfx.android.lib.network.domain.WifiNetwork;
+import br.com.alexpfx.android.lib.network.domain.*;
 
 import java.net.InetAddress;
+import java.net.UnknownHostException;
 import java.util.List;
 
 
 public class NetworkMainActivity extends ActionBarActivity implements NetworkScannerUseCase.Callback {
 
-    private Button button;
+    private Button btnNetworkscan;
+    private Button btnPortScanRange;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_network_main);
 
-        button = (Button) getView(R.id.btnScan);
-        button.setOnClickListener(new View.OnClickListener() {
+        btnNetworkscan = (Button) getView(R.id.btnScan);
+        btnNetworkscan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onScanClick();
+                onNetworkScan();
             }
         });
+
+        btnPortScanRange = (Button) getView(R.id.btnPortScanRange);
+        btnPortScanRange.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onPortRangeScan();
+            }
+        });
+
     }
 
 
@@ -45,7 +53,7 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
+        // automatically handle clicks on the Home/Up btnNetworkscan, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
@@ -59,14 +67,26 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
     }
 
     //Test
-    public void onScanClick() {
+    public void onNetworkScan() {
         final WifiNetwork wifiNetwork = new WifiNetwork((WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE));
         final InetAddress inetAddress = wifiNetwork.getInetAddress();
         Network n = new Network();
         final List<InetAddress> networkInetAddresses = n.getIpAddressRange(inetAddress);
         new NetworkScannerUseCaseImpl().execute(networkInetAddresses, 8008, 250, this);
+    }
+
+    public void onPortRangeScan() {
+
+        try {
+            final InetAddress byName = InetAddress.getByName("192.168.25.119");
+            PortScannerUseCase u = new RangePortScannerUseCaseImpl(byName, 100, 9000, 100);
+        } catch (UnknownHostException e) {
+
+        }
+
 
     }
+
 
     public View getView(int resId) {
         return findViewById(resId);
