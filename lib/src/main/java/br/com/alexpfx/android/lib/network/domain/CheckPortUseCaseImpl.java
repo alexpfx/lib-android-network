@@ -27,6 +27,7 @@ public class CheckPortUseCaseImpl implements CheckPortUseCase {
     @Override
     public void execute() {
         threadExecutor.execute(this);
+
     }
 
     @Override

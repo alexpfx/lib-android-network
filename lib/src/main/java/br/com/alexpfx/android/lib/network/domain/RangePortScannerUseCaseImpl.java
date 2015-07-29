@@ -13,19 +13,23 @@ public class RangePortScannerUseCaseImpl implements PortScannerUseCase, CheckPor
     private int initPort;
     private int finalPort;
     private int timeout;
-    private ThreadExecutor threadExecutor = new ThreadExecutor(20);
+
     private List<Integer> openPorts = new ArrayList<>();
     private Callback callback;
     private int numberOfPorts;
     private int totalScanned = 0;
 
-    public RangePortScannerUseCaseImpl(InetAddress inetAddress, int initPort, int finalPort, int timeout) {
+    private ThreadExecutor threadExecutor;
+
+    public RangePortScannerUseCaseImpl(InetAddress inetAddress, int initPort, int finalPort, int timeout, int threads) {
         this.inetAddress = inetAddress;
         if (initPort > finalPort) throw new IllegalArgumentException("initPort > finalport");
         this.initPort = initPort;
         this.finalPort = finalPort;
         this.timeout = timeout;
         numberOfPorts = finalPort - initPort;
+        threadExecutor = new ThreadExecutor(threads);
+
     }
 
     @Override
