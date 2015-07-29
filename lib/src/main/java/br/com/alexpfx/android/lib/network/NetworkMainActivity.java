@@ -12,12 +12,14 @@ import br.com.alexpfx.android.lib.network.domain.*;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
-public class NetworkMainActivity extends ActionBarActivity implements NetworkScannerUseCase.Callback {
+public class NetworkMainActivity extends ActionBarActivity implements NetworkScannerUseCase.Callback, PortScannerUseCase.Callback {
 
     private Button btnNetworkscan;
     private Button btnPortScanRange;
+    private long beforeScan;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -79,13 +81,12 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
 
         try {
             final InetAddress byName = InetAddress.getByName("192.168.25.119");
-            PortScannerUseCase u = new RangePortScannerUseCaseImpl(byName, 100, 9000, 100);
-            u.execute();
+            long before = System.currentTimeMillis();
+            PortScannerUseCase u = new RangePortScannerUseCaseImpl(byName, 100, 446, 300);
+            u.execute(this);
         } catch (UnknownHostException e) {
 
         }
-
-
     }
 
 
@@ -96,5 +97,26 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
     @Override
     public void onResultReceived(String result) {
         System.out.println(result);
+    }
+
+    @Override
+    public void onPortScanStart() {
+        beforeScan = System.currentTimeMillis();
+        System.out.println("scan started ");
+    }
+
+    @Override
+    public void onUpdateStatus(double status) {
+        System.out.println(status + " %");
+    }
+
+    @Override
+    public void onPortScanFinish(Integer[] openPorts) {
+        long afterScan = System.currentTimeMillis();
+        for (int port : openPorts) {
+            System.out.println("open: " + port);
+        }
+        System.out.println("\n Scan levou " + TimeUnit.MILLISECONDS.toSeconds(afterScan - beforeScan));
+
     }
 }

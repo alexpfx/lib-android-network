@@ -2,6 +2,7 @@ package br.com.alexpfx.android.lib.network.domain;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
+import java.util.concurrent.TimeUnit;
 
 /**
  * Created by alexandre on 28/07/15.
@@ -25,5 +26,9 @@ public class ThreadExecutor {
             }
         });
     }
+
+
+
+
 
 }

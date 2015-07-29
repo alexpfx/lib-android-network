@@ -6,10 +6,12 @@ package br.com.alexpfx.android.lib.network.domain;
 public interface PortScannerUseCase extends Interactor {
 
 
-    void execute();
+    void execute(Callback callback);
 
     interface Callback {
-        void onStatus ();
+        void onPortScanStart ();
+        void onUpdateStatus (double status);
+        void onPortScanFinish (Integer [] openPorts);
     }
 
 
