@@ -81,8 +81,7 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
 
         try {
             final InetAddress byName = InetAddress.getByName("192.168.25.119");
-            long before = System.currentTimeMillis();
-            PortScannerUseCase u = new RangePortScannerUseCaseImpl(byName, 100, 446, 300);
+            PortScannerUseCase u = new RangePortScannerUseCaseImpl(byName, 100, 1000, 600);
             u.execute(this);
         } catch (UnknownHostException e) {
 
@@ -106,17 +105,17 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
     }
 
     @Override
-    public void onUpdateStatus(double status) {
-        System.out.println(status + " %");
+    public void onUpdateStatus(double percent) {
+        System.out.format("%.2f%s\n", percent,"%");
     }
 
     @Override
-    public void onPortScanFinish(Integer[] openPorts) {
+    public void onPortScanFinish(List<Integer> openPorts) {
         long afterScan = System.currentTimeMillis();
-        for (int port : openPorts) {
+        for (Integer port : openPorts) {
             System.out.println("open: " + port);
         }
-        System.out.println("\n Scan levou " + TimeUnit.MILLISECONDS.toSeconds(afterScan - beforeScan));
+        System.out.println("tempo scan em segundos: " + TimeUnit.MILLISECONDS.toSeconds(afterScan - beforeScan));
 
     }
 }

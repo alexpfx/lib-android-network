@@ -31,7 +31,6 @@ public class RangePortScannerUseCaseImpl implements PortScannerUseCase, CheckPor
     @Override
     public void execute(Callback callback) {
         this.callback = callback;
-        callback.onPortScanStart();
         threadExecutor.execute(this);
 
     }
@@ -54,7 +53,6 @@ public class RangePortScannerUseCaseImpl implements PortScannerUseCase, CheckPor
                 openPorts.add(port);
             }
             if (totalScanned == numberOfPorts) {
-                System.out.println(openPorts.size());
                 callback.onPortScanFinish(openPorts);
             }
         }
