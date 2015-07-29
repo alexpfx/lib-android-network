@@ -33,7 +33,7 @@ public class RangePortScannerUseCaseImpl implements PortScannerUseCase, CheckPor
         this.callback = callback;
         callback.onPortScanStart();
         threadExecutor.execute(this);
-        callback.onPortScanFinish(openPorts.toArray(new Integer[0]));
+
     }
 
     @Override
@@ -52,6 +52,9 @@ public class RangePortScannerUseCaseImpl implements PortScannerUseCase, CheckPor
             callback.onUpdateStatus((double) totalScanned * 100d / numberOfPorts);
             if (PortStatus.OPEN.equals(port)) {
                 openPorts.add(port);
+            }
+            if (totalScanned == numberOfPorts) {
+                callback.onPortScanFinish(openPorts.toArray(new Integer[0]));
             }
         }
     }
