@@ -50,11 +50,12 @@ public class RangePortScannerUseCaseImpl implements PortScannerUseCase, CheckPor
         synchronized (this) {
             totalScanned++;
             callback.onUpdateStatus((double) totalScanned * 100d / numberOfPorts);
-            if (PortStatus.OPEN.equals(port)) {
+            if (PortStatus.OPEN.equals(status)) {
                 openPorts.add(port);
             }
             if (totalScanned == numberOfPorts) {
-                callback.onPortScanFinish(openPorts.toArray(new Integer[0]));
+                System.out.println(openPorts.size());
+                callback.onPortScanFinish(openPorts);
             }
         }
     }
