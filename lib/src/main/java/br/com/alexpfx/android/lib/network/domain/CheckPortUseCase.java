@@ -5,12 +5,12 @@ import java.net.InetAddress;
 /**
  * Created by alexandre on 28/07/15.
  */
-public interface CheckPortUseCase extends Interactor{
+public interface CheckPortUseCase extends Interactor {
 
-    void execute ();
+    void execute();
 
     interface Callback {
-        void onStatus (PortStatus status, InetAddress inetAddress, int port);
+        void onStatus(PortStatus status, InetAddress inetAddress, int port);
     }
 }
 

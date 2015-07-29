@@ -12,6 +12,7 @@ public class Network {
 
     /**
      * Obtem todos ips da rede.
+     *
      * @param inetAddress
      * @return
      */

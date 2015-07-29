@@ -62,7 +62,6 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
     public void onScanClick() {
         final WifiNetwork wifiNetwork = new WifiNetwork((WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE));
         final InetAddress inetAddress = wifiNetwork.getInetAddress();
-        System.out.println(inetAddress.getHostAddress());
         Network n = new Network();
         final List<InetAddress> networkInetAddresses = n.getIpAddressRange(inetAddress);
         new NetworkScannerUseCaseImpl().execute(networkInetAddresses, 8008, 250, this);

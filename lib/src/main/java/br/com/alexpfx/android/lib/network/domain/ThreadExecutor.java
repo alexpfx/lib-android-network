@@ -8,9 +8,8 @@ import java.util.concurrent.ThreadPoolExecutor;
  */
 public class ThreadExecutor {
 
-    private ThreadPoolExecutor threadPoolExecutor;
-
     private final int poolSize;
+    private ThreadPoolExecutor threadPoolExecutor;
 
 
     public ThreadExecutor(int poolSize) {
