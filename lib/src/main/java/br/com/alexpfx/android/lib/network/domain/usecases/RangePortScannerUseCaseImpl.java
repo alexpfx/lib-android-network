@@ -52,7 +52,7 @@ public class RangePortScannerUseCaseImpl implements PortScannerUseCase, CheckPor
     }
 
     @Override
-    public void onStatus(PortStatus status, InetAddress inetAddress, int port) {
+    public void onResult(PortStatus status, InetAddress inetAddress, int port) {
         synchronized (this) {
             totalScanned++;
             callback.onUpdateStatus((double) totalScanned * 100d / numberOfPorts);

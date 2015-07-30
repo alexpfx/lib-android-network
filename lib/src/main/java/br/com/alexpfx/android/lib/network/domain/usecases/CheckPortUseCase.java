@@ -13,7 +13,7 @@ public interface CheckPortUseCase extends Interactor {
     void execute();
 
     interface Callback {
-        void onStatus(PortStatus status, InetAddress inetAddress, int port);
+        void onResult(PortStatus status, InetAddress inetAddress, int port);
     }
 }
 

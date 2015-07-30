@@ -43,7 +43,7 @@ public class ListPortScannerUseCaseImpl implements PortScannerUseCase, CheckPort
     }
 
     @Override
-    public void onStatus(PortStatus status, InetAddress inetAddress, int port) {
+    public void onResult(PortStatus status, InetAddress inetAddress, int port) {
 
     }
 }
