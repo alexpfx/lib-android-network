@@ -12,6 +12,7 @@ import br.com.alexpfx.android.lib.network.receivers.WifiInfo;
 public class OpenWifiConnectUseCaseImpl implements WifiConnectUseCase {
 
 
+    WifiManager wifiManager;
     private int netId;
     private WifiInfo wifiInfo;
     private Callback callback;
@@ -19,9 +20,6 @@ public class OpenWifiConnectUseCaseImpl implements WifiConnectUseCase {
     public OpenWifiConnectUseCaseImpl(WifiManager wifiManager) {
         this.wifiManager = wifiManager;
     }
-
-    WifiManager wifiManager;
-
 
     @Override
     public void execute(ThreadExecutor threadExecutor, WifiInfo wifiInfo, Callback callback) {

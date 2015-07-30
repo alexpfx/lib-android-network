@@ -16,6 +16,15 @@ public class WifiInfo {
     private final int level;
     private long timestamp = 0L;
 
+    public WifiInfo(String capabilities, String ssid, String bssid, int frequency, int level, long timestamp) {
+        this.capabilities = capabilities;
+        this.ssid = ssid;
+        this.bssid = bssid;
+        this.frequency = frequency;
+        this.level = level;
+        this.timestamp = timestamp;
+    }
+
     public static WifiInfo fromScanResult(ScanResult scanResult) {
         String capabilities = scanResult.capabilities;
         String ssid = scanResult.SSID;
@@ -27,15 +36,6 @@ public class WifiInfo {
             timestamp = scanResult.timestamp;
         }
         return new WifiInfo(capabilities, ssid, bssid, frequency, level, timestamp);
-    }
-
-    public WifiInfo(String capabilities, String ssid, String bssid, int frequency, int level, long timestamp) {
-        this.capabilities = capabilities;
-        this.ssid = ssid;
-        this.bssid = bssid;
-        this.frequency = frequency;
-        this.level = level;
-        this.timestamp = timestamp;
     }
 
     public String getCapabilities() {

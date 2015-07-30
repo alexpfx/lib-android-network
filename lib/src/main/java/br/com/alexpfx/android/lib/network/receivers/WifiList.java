@@ -24,9 +24,13 @@ public class WifiList {
 
     public List<WifiInfo> getOpenWifis() {
         List<WifiInfo> open = new ArrayList<>();
-        for (WifiInfo w : wifiInfoList) {
-            if (w.testAgainstSecurityModes(WifiSecurityMode.WEP, WifiSecurityMode.WPA, WifiSecurityMode.WPA2).equals(WifiSecurityMode.UNKNOWN)) {
-                open.add(w);
+        for (WifiInfo wifiInfo : wifiInfoList) {
+            if (wifiInfo.testAgainstSecurityModes(
+                    WifiSecurityMode.WEP,
+                    WifiSecurityMode.WPA,
+                    WifiSecurityMode.WPA2)
+                    .equals(WifiSecurityMode.UNKNOWN)) {
+                open.add(wifiInfo);
             }
         }
         return open;

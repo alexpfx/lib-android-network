@@ -26,7 +26,7 @@ public class WifiNetworkManager {
         return IpUtils.intToInetAddress(connectionInfo.getIpAddress());
     }
 
-    public void scan(){
+    public void scan() {
         wifiManager.startScan();
     }
 

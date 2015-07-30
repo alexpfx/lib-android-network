@@ -58,12 +58,12 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
                 onPortRangeScan();
             }
         });
-        
+
         btnWifiScan = (Button) getView(R.id.btnWifiScan);
         btnWifiScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                onBtnWifiScan ();
+                onBtnWifiScan();
             }
         });
 
@@ -119,7 +119,7 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
             PortScannerUseCase u = new RangePortScannerUseCaseImpl(byName, 2, 65123, 40, 50);
             u.execute(this);
         } catch (UnknownHostException e) {
-            
+
 
         }
     }
