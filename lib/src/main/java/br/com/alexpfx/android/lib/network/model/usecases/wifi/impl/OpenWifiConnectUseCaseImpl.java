@@ -26,7 +26,7 @@ public class OpenWifiConnectUseCaseImpl implements WifiConnectUseCase {
         this.wifiInfo = wifiInfo;
         this.callback = callback;
         WifiConfiguration wifiConfiguration = new WifiConfiguration();
-        wifiConfiguration.BSSID = wifiInfo.getBssid();
+        wifiConfiguration.SSID = wifiInfo.getSsid();
         wifiConfiguration.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
         netId = wifiManager.addNetwork(wifiConfiguration);
 
@@ -37,13 +37,17 @@ public class OpenWifiConnectUseCaseImpl implements WifiConnectUseCase {
     public void run() {
         wifiManager.disconnect();
         wifiManager.enableNetwork(netId, true);
-        final boolean connected = wifiManager.reconnect();
+        //TODO: precisa do reconnect?
+        //TODO: stackoverflow.com/questions/15755251/is-android-providing-any-listeners-or-callback-methods-when-connected-or-disconn
+
+        /*
+        //ta errado, o retorno do metodo nao indica conexao, mas apenas se o metodo foi executado. deve-se usar receiver proprio.
         if (connected) {
             final android.net.wifi.WifiInfo connectionInfo = wifiManager.getConnectionInfo();
-            System.out.println(connectionInfo.getSSID());
             callback.onWifiConnectionSuccess(netId, wifiInfo);
         } else {
             callback.onWifiConnectionFailure(netId, wifiInfo);
         }
+        */
     }
 }
