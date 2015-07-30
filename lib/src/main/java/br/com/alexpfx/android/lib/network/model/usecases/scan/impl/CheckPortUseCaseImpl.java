@@ -1,10 +1,10 @@
-package br.com.alexpfx.android.lib.network.model.scan.usecases.impl;
+package br.com.alexpfx.android.lib.network.model.usecases.scan.impl;
 
 import br.com.alexpfx.android.lib.network.model.AddressPort;
 import br.com.alexpfx.android.lib.network.model.PortStatus;
 import br.com.alexpfx.android.lib.network.model.ThreadExecutor;
-import br.com.alexpfx.android.lib.network.model.scan.usecases.CheckPortUseCase;
-import br.com.alexpfx.android.lib.network.model.scan.usecases.PortScanResult;
+import br.com.alexpfx.android.lib.network.model.usecases.scan.CheckPortUseCase;
+import br.com.alexpfx.android.lib.network.model.usecases.scan.PortScanResult;
 
 import java.io.IOException;
 import java.net.InetAddress;

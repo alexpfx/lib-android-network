@@ -3,6 +3,7 @@ package br.com.alexpfx.android.lib.network.model;
 import android.content.Context;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import br.com.alexpfx.android.lib.network.utils.IpUtils;
 
 import java.net.InetAddress;
 
@@ -24,6 +25,8 @@ public class WifiNetwork {
         final WifiInfo connectionInfo = wifiManager.getConnectionInfo();
         return IpUtils.intToInetAddress(connectionInfo.getIpAddress());
     }
+
+
 
 
 }

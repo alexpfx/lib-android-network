@@ -1,8 +1,10 @@
-package br.com.alexpfx.android.lib.network.model;
+package br.com.alexpfx.android.lib.network.utils;
 
 import java.net.Inet4Address;
 import java.net.InetAddress;
 import java.net.UnknownHostException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by alexandre on 28/07/15.
@@ -28,6 +30,29 @@ public class IpUtils {
             //TODO
         }
         return null;
+    }
+
+    /**
+     * Obtem todos ips da rede.
+     *
+     * @param inetAddress
+     * @return
+     */
+    public static List<InetAddress> getSubNetIpRange(final InetAddress inetAddress) {
+        List<InetAddress> hosts = new ArrayList<>();
+        String baseIpAddress = inetAddress.getHostAddress();
+        String subnet = baseIpAddress.substring(0, baseIpAddress.lastIndexOf(".") + 1);
+
+        for (int i = 1; i < 256; i++) {
+            final String host = subnet.concat(String.valueOf(i));
+            try {
+                final InetAddress inetByHostName = InetAddress.getByName(host);
+                hosts.add(inetByHostName);
+            } catch (UnknownHostException e) {
+
+            }
+        }
+        return hosts;
     }
 
 

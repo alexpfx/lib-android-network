@@ -8,10 +8,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import br.com.alexpfx.android.lib.network.model.*;
-import br.com.alexpfx.android.lib.network.model.scan.usecases.NetworkScannerUseCase;
-import br.com.alexpfx.android.lib.network.model.scan.usecases.impl.NetworkScannerUseCaseImpl;
-import br.com.alexpfx.android.lib.network.model.scan.usecases.PortScannerUseCase;
-import br.com.alexpfx.android.lib.network.model.scan.usecases.impl.RangePortScannerUseCaseImpl;
+import br.com.alexpfx.android.lib.network.model.usecases.scan.NetworkScannerUseCase;
+import br.com.alexpfx.android.lib.network.model.usecases.scan.impl.NetworkScannerUseCaseImpl;
+import br.com.alexpfx.android.lib.network.model.usecases.scan.PortScannerUseCase;
+import br.com.alexpfx.android.lib.network.model.usecases.scan.impl.RangePortScannerUseCaseImpl;
+import br.com.alexpfx.android.lib.network.utils.IpUtils;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -76,8 +77,7 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
     public void onNetworkScan() {
         final WifiNetwork wifiNetwork = new WifiNetwork((WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE));
         final InetAddress inetAddress = wifiNetwork.getInetAddress();
-        Network n = new Network();
-        final List<InetAddress> networkInetAddresses = n.getIpAddressRange(inetAddress);
+        final List<InetAddress> networkInetAddresses = IpUtils.getSubNetIpRange(inetAddress);
         new NetworkScannerUseCaseImpl().execute(networkInetAddresses, 8008, 250, this);
     }
 
