@@ -7,7 +7,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import br.com.alexpfx.android.lib.network.model.WifiNetwork;
+import br.com.alexpfx.android.lib.network.model.WifiNetworkManager;
 import br.com.alexpfx.android.lib.network.model.usecases.scan.NetworkScannerUseCase;
 import br.com.alexpfx.android.lib.network.model.usecases.scan.PortScannerUseCase;
 import br.com.alexpfx.android.lib.network.model.usecases.scan.impl.NetworkScannerUseCaseImpl;
@@ -75,8 +75,8 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
 
     //Test
     public void onNetworkScan() {
-        final WifiNetwork wifiNetwork = new WifiNetwork((WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE));
-        final InetAddress inetAddress = wifiNetwork.getInetAddress();
+        final WifiNetworkManager wifiNetworkManager = new WifiNetworkManager((WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE));
+        final InetAddress inetAddress = wifiNetworkManager.getInetAddress();
         final List<InetAddress> networkInetAddresses = IpUtils.getSubNetIpRange(inetAddress);
         new NetworkScannerUseCaseImpl().execute(networkInetAddresses, 8008, 250, this);
     }

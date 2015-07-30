@@ -10,13 +10,13 @@ import java.net.InetAddress;
 /**
  * Created by alexandre on 27/07/15.
  */
-public class WifiNetwork {
+public class WifiNetworkManager {
 
     private Context context;
     private WifiManager wifiManager;
 
 
-    public WifiNetwork(WifiManager manager) {
+    public WifiNetworkManager(WifiManager manager) {
         this.wifiManager = manager;
     }
 
@@ -24,6 +24,10 @@ public class WifiNetwork {
     public InetAddress getInetAddress() {
         final WifiInfo connectionInfo = wifiManager.getConnectionInfo();
         return IpUtils.intToInetAddress(connectionInfo.getIpAddress());
+    }
+
+    public void scan(){
+        wifiManager.startScan();
     }
 
 }
