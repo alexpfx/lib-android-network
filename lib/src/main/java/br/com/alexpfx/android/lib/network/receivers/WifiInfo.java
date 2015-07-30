@@ -2,6 +2,7 @@ package br.com.alexpfx.android.lib.network.receivers;
 
 import android.net.wifi.ScanResult;
 import android.os.Build;
+import br.com.alexpfx.android.lib.network.model.WifiSecurityMode;
 
 /**
  * Created by alexandre on 29/07/15.
@@ -61,15 +62,12 @@ public class WifiInfo {
         return timestamp;
     }
 
-    public String testAgainstSecurityModes(String... securities) {
-        if (capabilities.equals("")) {
-            return "open";
-        }
-        for (String security : securities) {
-            if (capabilities.toLowerCase().contains(security)) {
+    public WifiSecurityMode testAgainstSecurityModes(WifiSecurityMode... securities) {
+        for (WifiSecurityMode security : securities) {
+            if (this.capabilities.toLowerCase().contains(security.getName())) {
                 return security;
             }
         }
-        return "none_of_these";
+        return WifiSecurityMode.UNKNOWN;
     }
 }

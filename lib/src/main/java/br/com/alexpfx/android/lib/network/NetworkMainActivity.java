@@ -170,7 +170,7 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
 
     @Subscribe
     public void onScanResultReceived(WifiList list) {
-        System.out.println(list);
+
         WifiConnectUseCase connectUseCase = new OpenWifiConnectUseCaseImpl(getWifiManagerService());
     }
 

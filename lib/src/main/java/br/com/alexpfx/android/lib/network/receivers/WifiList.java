@@ -1,6 +1,8 @@
 package br.com.alexpfx.android.lib.network.receivers;
 
 
+import br.com.alexpfx.android.lib.network.model.WifiSecurityMode;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
@@ -23,7 +25,7 @@ public class WifiList {
     public List<WifiInfo> getOpenWifis() {
         List<WifiInfo> open = new ArrayList<>();
         for (WifiInfo w : wifiInfoList) {
-            if (w.testAgainstSecurityModes("WEP", "WPA").equals("open")) {
+            if (w.testAgainstSecurityModes(WifiSecurityMode.WEP, WifiSecurityMode.WPA, WifiSecurityMode.WPA2).equals(WifiSecurityMode.UNKNOWN)) {
                 open.add(w);
             }
         }
