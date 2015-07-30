@@ -1,5 +1,6 @@
 package br.com.alexpfx.android.lib.network;
 
+import android.content.IntentFilter;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.ActionBarActivity;
@@ -8,11 +9,15 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
 import br.com.alexpfx.android.lib.network.model.WifiNetworkManager;
-import br.com.alexpfx.android.lib.network.model.usecases.scan.NetworkScannerUseCase;
-import br.com.alexpfx.android.lib.network.model.usecases.scan.PortScannerUseCase;
-import br.com.alexpfx.android.lib.network.model.usecases.scan.impl.NetworkScannerUseCaseImpl;
-import br.com.alexpfx.android.lib.network.model.usecases.scan.impl.RangePortScannerUseCaseImpl;
+import br.com.alexpfx.android.lib.network.model.usecases.portscan.NetworkScannerUseCase;
+import br.com.alexpfx.android.lib.network.model.usecases.portscan.PortScannerUseCase;
+import br.com.alexpfx.android.lib.network.model.usecases.portscan.impl.NetworkScannerUseCaseImpl;
+import br.com.alexpfx.android.lib.network.model.usecases.portscan.impl.RangePortScannerUseCaseImpl;
+import br.com.alexpfx.android.lib.network.receivers.WifiList;
+import br.com.alexpfx.android.lib.network.receivers.WifiScanResultBroadcastReceiver;
 import br.com.alexpfx.android.lib.network.utils.IpUtils;
+import com.squareup.otto.Bus;
+import com.squareup.otto.Subscribe;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;
@@ -20,11 +25,13 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
+//TODO: essa eh uma activity para testes. para implementações oficiais usar fragmentos.
 public class NetworkMainActivity extends ActionBarActivity implements NetworkScannerUseCase.Callback, PortScannerUseCase.Callback {
 
     private Button btnNetworkscan;
     private Button btnPortScanRange;
     private long beforeScan;
+    private WifiScanResultBroadcastReceiver wifiScanResultBroadcastReceiver;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,6 +53,10 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
                 onPortRangeScan();
             }
         });
+
+        final Bus bus = new Bus();
+        bus.register(this);
+        wifiScanResultBroadcastReceiver = new WifiScanResultBroadcastReceiver(bus);
 
     }
 
@@ -122,4 +133,24 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
         System.out.println("tempo scan em segundos: " + TimeUnit.MILLISECONDS.toSeconds(afterScan - beforeScan));
 
     }
+
+    @Override
+    protected void onResume() {
+        registerReceiver(wifiScanResultBroadcastReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
+        super.onResume();
+    }
+
+    @Override
+    protected void onPause() {
+        unregisterReceiver(wifiScanResultBroadcastReceiver);
+        super.onPause();
+    }
+
+
+    @Subscribe
+    public void onScanResultReceived (WifiList list){
+
+
+    }
+
 }

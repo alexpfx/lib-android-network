@@ -1,4 +1,4 @@
-package br.com.alexpfx.android.lib.network.model.usecases.scan;
+package br.com.alexpfx.android.lib.network.model.usecases.portscan;
 
 import br.com.alexpfx.android.lib.network.model.PortStatus;
 
