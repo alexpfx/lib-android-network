@@ -36,4 +36,40 @@ public class WifiInfo {
         this.level = level;
         this.timestamp = timestamp;
     }
+
+    public String getCapabilities() {
+        return capabilities;
+    }
+
+    public String getSsid() {
+        return ssid;
+    }
+
+    public String getBssid() {
+        return bssid;
+    }
+
+    public int getFrequency() {
+        return frequency;
+    }
+
+    public int getLevel() {
+        return level;
+    }
+
+    public long getTimestamp() {
+        return timestamp;
+    }
+
+    public String testAgainstSecurityModes(String... securities) {
+        if (capabilities.equals("")) {
+            return "open";
+        }
+        for (String security : securities) {
+            if (capabilities.toLowerCase().contains(security)) {
+                return security;
+            }
+        }
+        return "none_of_these";
+    }
 }

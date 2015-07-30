@@ -20,4 +20,15 @@ public class WifiList {
         return wifiInfoList.iterator();
     }
 
+    public List<WifiInfo> getOpenWifis() {
+        List<WifiInfo> open = new ArrayList<>();
+        for (WifiInfo w : wifiInfoList) {
+            if (w.testAgainstSecurityModes("WEP", "WPA").equals("open")) {
+                open.add(w);
+            }
+        }
+        return open;
+    }
+
+
 }

@@ -13,6 +13,8 @@ import br.com.alexpfx.android.lib.network.model.usecases.portscan.NetworkScanner
 import br.com.alexpfx.android.lib.network.model.usecases.portscan.PortScannerUseCase;
 import br.com.alexpfx.android.lib.network.model.usecases.portscan.impl.NetworkScannerUseCaseImpl;
 import br.com.alexpfx.android.lib.network.model.usecases.portscan.impl.RangePortScannerUseCaseImpl;
+import br.com.alexpfx.android.lib.network.model.usecases.wifi.WifiConnectUseCase;
+import br.com.alexpfx.android.lib.network.model.usecases.wifi.impl.OpenWifiConnectUseCaseImpl;
 import br.com.alexpfx.android.lib.network.receivers.WifiList;
 import br.com.alexpfx.android.lib.network.receivers.WifiScanResultBroadcastReceiver;
 import br.com.alexpfx.android.lib.network.utils.IpUtils;
@@ -30,13 +32,16 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
 
     private Button btnNetworkscan;
     private Button btnPortScanRange;
+    private Button btnWifiScan;
     private long beforeScan;
     private WifiScanResultBroadcastReceiver wifiScanResultBroadcastReceiver;
+    private WifiNetworkManager wifiNetworkManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_network_main);
+        wifiNetworkManager = new WifiNetworkManager(getWifiManagerService());
 
         btnNetworkscan = (Button) getView(R.id.btnScan);
         btnNetworkscan.setOnClickListener(new View.OnClickListener() {
@@ -53,11 +58,23 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
                 onPortRangeScan();
             }
         });
+        
+        btnWifiScan = (Button) getView(R.id.btnWifiScan);
+        btnWifiScan.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onBtnWifiScan ();
+            }
+        });
 
         final Bus bus = new Bus();
         bus.register(this);
         wifiScanResultBroadcastReceiver = new WifiScanResultBroadcastReceiver(bus);
 
+    }
+
+    private void onBtnWifiScan() {
+        wifiNetworkManager.scan();
     }
 
 
@@ -86,10 +103,13 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
 
     //Test
     public void onNetworkScan() {
-        final WifiNetworkManager wifiNetworkManager = new WifiNetworkManager((WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE));
         final InetAddress inetAddress = wifiNetworkManager.getInetAddress();
         final List<InetAddress> networkInetAddresses = IpUtils.getSubNetIpRange(inetAddress);
         new NetworkScannerUseCaseImpl().execute(networkInetAddresses, 8008, 250, this);
+    }
+
+    private WifiManager getWifiManagerService() {
+        return (WifiManager) getApplicationContext().getSystemService(WIFI_SERVICE);
     }
 
     public void onPortRangeScan() {
@@ -99,6 +119,7 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
             PortScannerUseCase u = new RangePortScannerUseCaseImpl(byName, 2, 65123, 40, 50);
             u.execute(this);
         } catch (UnknownHostException e) {
+            
 
         }
     }
@@ -148,9 +169,9 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
 
 
     @Subscribe
-    public void onScanResultReceived (WifiList list){
-
-
+    public void onScanResultReceived(WifiList list) {
+        System.out.println(list);
+        WifiConnectUseCase connectUseCase = new OpenWifiConnectUseCaseImpl(getWifiManagerService());
     }
 
 }
