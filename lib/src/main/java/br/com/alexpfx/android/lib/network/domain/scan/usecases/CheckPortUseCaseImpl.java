@@ -1,4 +1,4 @@
-package br.com.alexpfx.android.lib.network.domain.usecases;
+package br.com.alexpfx.android.lib.network.domain.scan.usecases;
 
 import br.com.alexpfx.android.lib.network.domain.PortStatus;
 import br.com.alexpfx.android.lib.network.domain.ThreadExecutor;
@@ -41,7 +41,7 @@ public class CheckPortUseCaseImpl implements CheckPortUseCase {
             s.close();
             callback.onResult(new PortScanResultImpl(new AddressPort(inetAddress, port), PortStatus.OPEN));
         } catch (IOException e) {
-            callback.onResult(new PortScanResultImpl(new AddressPort(inetAddress, port), PortStatus.OPEN));
+            callback.onResult(new PortScanResultImpl(new AddressPort(inetAddress, port), PortStatus.CLOSED));
         }
     }
 
