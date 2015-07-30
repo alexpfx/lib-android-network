@@ -7,10 +7,10 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import br.com.alexpfx.android.lib.network.model.*;
+import br.com.alexpfx.android.lib.network.model.WifiNetwork;
 import br.com.alexpfx.android.lib.network.model.usecases.scan.NetworkScannerUseCase;
-import br.com.alexpfx.android.lib.network.model.usecases.scan.impl.NetworkScannerUseCaseImpl;
 import br.com.alexpfx.android.lib.network.model.usecases.scan.PortScannerUseCase;
+import br.com.alexpfx.android.lib.network.model.usecases.scan.impl.NetworkScannerUseCaseImpl;
 import br.com.alexpfx.android.lib.network.model.usecases.scan.impl.RangePortScannerUseCaseImpl;
 import br.com.alexpfx.android.lib.network.utils.IpUtils;
 

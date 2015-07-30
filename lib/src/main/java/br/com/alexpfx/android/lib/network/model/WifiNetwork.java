@@ -26,7 +26,4 @@ public class WifiNetwork {
         return IpUtils.intToInetAddress(connectionInfo.getIpAddress());
     }
 
-
-
-
 }

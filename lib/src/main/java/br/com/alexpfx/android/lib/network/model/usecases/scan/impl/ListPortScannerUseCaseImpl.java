@@ -21,7 +21,7 @@ public class ListPortScannerUseCaseImpl implements PortScannerUseCase, CheckPort
     private ThreadExecutor threadExecutor;
     private Callback callback;
 
-    private ListPortScannerUseCaseImpl (InetAddress inetAddress, int [] ports, int timeout, int threads){
+    private ListPortScannerUseCaseImpl(InetAddress inetAddress, int[] ports, int timeout, int threads) {
         this.inetAddress = inetAddress;
         this.ports = ports;
         this.timeout = timeout;
@@ -38,7 +38,7 @@ public class ListPortScannerUseCaseImpl implements PortScannerUseCase, CheckPort
     @Override
     public void run() {
         callback.onPortScanStart();
-        for (int port:ports) {
+        for (int port : ports) {
             CheckPortUseCase c = new CheckPortUseCaseImpl(threadExecutor, inetAddress, port, timeout, this);
             c.execute();
         }

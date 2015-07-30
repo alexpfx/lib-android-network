@@ -13,9 +13,11 @@ public interface PortScannerUseCase extends Interactor {
     void execute(Callback callback);
 
     interface Callback {
-        void onPortScanStart ();
-        void onUpdateStatus (double status);
-        void onPortScanFinish (List<Integer> openPorts);
+        void onPortScanStart();
+
+        void onUpdateStatus(double status);
+
+        void onPortScanFinish(List<Integer> openPorts);
     }
 
 
