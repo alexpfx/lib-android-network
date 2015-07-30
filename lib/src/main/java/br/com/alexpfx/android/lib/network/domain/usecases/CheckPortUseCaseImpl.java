@@ -39,9 +39,10 @@ public class CheckPortUseCaseImpl implements CheckPortUseCase {
         try {
             s.connect(new InetSocketAddress(inetAddress, port), timeout);
             s.close();
-            callback.onResult(PortStatus.OPEN, inetAddress, port);
+            callback.onResult(new PortScanResultImpl(new AddressPort(inetAddress, port), PortStatus.OPEN));
         } catch (IOException e) {
-            callback.onResult(PortStatus.CLOSED, inetAddress, port);
+            callback.onResult(new PortScanResultImpl(new AddressPort(inetAddress, port), PortStatus.OPEN));
         }
     }
+
 }

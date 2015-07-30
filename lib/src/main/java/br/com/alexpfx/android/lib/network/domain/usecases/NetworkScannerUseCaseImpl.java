@@ -28,9 +28,9 @@ public class NetworkScannerUseCaseImpl implements NetworkScannerUseCase, CheckPo
     }
 
     @Override
-    public void onResult(PortStatus status, InetAddress inetAddress, int port) {
-        if (PortStatus.OPEN.equals(status)) {
-            System.out.println(inetAddress);
+    public void onResult(PortScanResult scanResult) {
+        if (PortStatus.OPEN.equals(scanResult.getPortStatus())) {
+            System.out.println(scanResult.getPortStatus());
             System.out.println(port);
         }
     }

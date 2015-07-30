@@ -1,6 +1,5 @@
 package br.com.alexpfx.android.lib.network.domain.usecases;
 
-import br.com.alexpfx.android.lib.network.domain.PortStatus;
 import br.com.alexpfx.android.lib.network.domain.ThreadExecutor;
 
 import java.net.InetAddress;
@@ -43,7 +42,7 @@ public class ListPortScannerUseCaseImpl implements PortScannerUseCase, CheckPort
     }
 
     @Override
-    public void onResult(PortStatus status, InetAddress inetAddress, int port) {
+    public void onResult(PortScanResult scanResult) {
 
     }
 }
