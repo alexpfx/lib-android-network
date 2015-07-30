@@ -8,6 +8,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import br.com.alexpfx.android.lib.network.model.ThreadExecutor;
 import br.com.alexpfx.android.lib.network.model.WifiNetworkManager;
 import br.com.alexpfx.android.lib.network.model.usecases.portscan.NetworkScannerUseCase;
 import br.com.alexpfx.android.lib.network.model.usecases.portscan.PortScannerUseCase;
@@ -15,6 +16,7 @@ import br.com.alexpfx.android.lib.network.model.usecases.portscan.impl.NetworkSc
 import br.com.alexpfx.android.lib.network.model.usecases.portscan.impl.RangePortScannerUseCaseImpl;
 import br.com.alexpfx.android.lib.network.model.usecases.wifi.WifiConnectUseCase;
 import br.com.alexpfx.android.lib.network.model.usecases.wifi.impl.OpenWifiConnectUseCaseImpl;
+import br.com.alexpfx.android.lib.network.receivers.WifiInfo;
 import br.com.alexpfx.android.lib.network.receivers.WifiList;
 import br.com.alexpfx.android.lib.network.receivers.WifiScanResultBroadcastReceiver;
 import br.com.alexpfx.android.lib.network.utils.IpUtils;
@@ -28,7 +30,7 @@ import java.util.concurrent.TimeUnit;
 
 
 //TODO: essa eh uma activity para testes. para implementações oficiais usar fragmentos.
-public class NetworkMainActivity extends ActionBarActivity implements NetworkScannerUseCase.Callback, PortScannerUseCase.Callback {
+public class NetworkMainActivity extends ActionBarActivity implements NetworkScannerUseCase.Callback, PortScannerUseCase.Callback, WifiConnectUseCase.Callback {
 
     private Button btnNetworkscan;
     private Button btnPortScanRange;
@@ -170,8 +172,20 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
 
     @Subscribe
     public void onScanResultReceived(WifiList list) {
-
-        WifiConnectUseCase connectUseCase = new OpenWifiConnectUseCaseImpl(getWifiManagerService());
+        final List<WifiInfo> openWifis = list.getOpenWifis();
+        for (WifiInfo w : openWifis) {
+            WifiConnectUseCase connectUseCase = new OpenWifiConnectUseCaseImpl(getWifiManagerService());
+            connectUseCase.execute(new ThreadExecutor(2), w, this);
+        }
     }
 
+    @Override
+    public void onWifiConnectionSuccess(int netId, WifiInfo wifiInfo) {
+        System.out.println(netId);
+    }
+
+    @Override
+    public void onWifiConnectionFailure(int netId, WifiInfo wifiInfo) {
+        System.out.println(netId);
+    }
 }

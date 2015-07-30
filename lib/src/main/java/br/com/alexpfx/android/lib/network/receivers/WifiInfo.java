@@ -64,10 +64,15 @@ public class WifiInfo {
 
     public WifiSecurityMode testAgainstSecurityModes(WifiSecurityMode... securities) {
         for (WifiSecurityMode security : securities) {
-            if (this.capabilities.toLowerCase().contains(security.getName())) {
+            if (this.capabilities.toUpperCase().contains(security.getName().toUpperCase())) {
                 return security;
             }
         }
         return WifiSecurityMode.UNKNOWN;
+    }
+
+    @Override
+    public String toString() {
+        return ssid;
     }
 }

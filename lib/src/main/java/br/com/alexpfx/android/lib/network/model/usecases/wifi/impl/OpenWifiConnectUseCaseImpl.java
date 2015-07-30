@@ -37,9 +37,10 @@ public class OpenWifiConnectUseCaseImpl implements WifiConnectUseCase {
     public void run() {
         wifiManager.disconnect();
         wifiManager.enableNetwork(netId, true);
-        wifiManager.enableNetwork(netId, true);
         final boolean connected = wifiManager.reconnect();
         if (connected) {
+            final android.net.wifi.WifiInfo connectionInfo = wifiManager.getConnectionInfo();
+            System.out.println(connectionInfo.getSSID());
             callback.onWifiConnectionSuccess(netId, wifiInfo);
         } else {
             callback.onWifiConnectionFailure(netId, wifiInfo);
