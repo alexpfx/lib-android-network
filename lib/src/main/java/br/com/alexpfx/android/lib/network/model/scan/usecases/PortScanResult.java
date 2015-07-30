@@ -1,18 +1,19 @@
-package br.com.alexpfx.android.lib.network.domain.scan.usecases;
+package br.com.alexpfx.android.lib.network.model.scan.usecases;
 
-import br.com.alexpfx.android.lib.network.domain.PortStatus;
+import br.com.alexpfx.android.lib.network.model.AddressPort;
+import br.com.alexpfx.android.lib.network.model.PortStatus;
 
 import java.net.InetAddress;
 
 /**
  * Created by alexandre on 29/07/15.
  */
-public class PortScanResultImpl implements PortScanResult {
+public class PortScanResult implements ScanResult {
 
     private final AddressPort addressPort;
     private final PortStatus status;
 
-    public PortScanResultImpl(AddressPort addressPort, PortStatus status) {
+    public PortScanResult(AddressPort addressPort, PortStatus status) {
         this.addressPort = addressPort;
         this.status = status;
     }

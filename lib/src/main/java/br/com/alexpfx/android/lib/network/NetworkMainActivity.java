@@ -7,11 +7,11 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import br.com.alexpfx.android.lib.network.domain.*;
-import br.com.alexpfx.android.lib.network.domain.scan.usecases.NetworkScannerUseCase;
-import br.com.alexpfx.android.lib.network.domain.scan.usecases.NetworkScannerUseCaseImpl;
-import br.com.alexpfx.android.lib.network.domain.scan.usecases.PortScannerUseCase;
-import br.com.alexpfx.android.lib.network.domain.scan.usecases.RangePortScannerUseCaseImpl;
+import br.com.alexpfx.android.lib.network.model.*;
+import br.com.alexpfx.android.lib.network.model.scan.usecases.NetworkScannerUseCase;
+import br.com.alexpfx.android.lib.network.model.scan.usecases.impl.NetworkScannerUseCaseImpl;
+import br.com.alexpfx.android.lib.network.model.scan.usecases.PortScannerUseCase;
+import br.com.alexpfx.android.lib.network.model.scan.usecases.impl.RangePortScannerUseCaseImpl;
 
 import java.net.InetAddress;
 import java.net.UnknownHostException;

@@ -1,6 +1,6 @@
-package br.com.alexpfx.android.lib.network.domain.scan.usecases;
+package br.com.alexpfx.android.lib.network.model.scan.usecases;
 
-import br.com.alexpfx.android.lib.network.domain.Interactor;
+import br.com.alexpfx.android.lib.network.model.Interactor;
 
 import java.util.List;
 

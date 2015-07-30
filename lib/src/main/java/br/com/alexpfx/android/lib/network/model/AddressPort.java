@@ -1,4 +1,4 @@
-package br.com.alexpfx.android.lib.network.domain.scan.usecases;
+package br.com.alexpfx.android.lib.network.model;
 
 import java.net.InetAddress;
 

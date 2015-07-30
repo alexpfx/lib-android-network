@@ -1,4 +1,4 @@
-package br.com.alexpfx.android.lib.network.domain;
+package br.com.alexpfx.android.lib.network.model;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;

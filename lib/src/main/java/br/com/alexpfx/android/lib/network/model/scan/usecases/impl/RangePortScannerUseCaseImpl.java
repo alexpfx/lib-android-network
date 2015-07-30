@@ -1,7 +1,10 @@
-package br.com.alexpfx.android.lib.network.domain.scan.usecases;
+package br.com.alexpfx.android.lib.network.model.scan.usecases.impl;
 
-import br.com.alexpfx.android.lib.network.domain.PortStatus;
-import br.com.alexpfx.android.lib.network.domain.ThreadExecutor;
+import br.com.alexpfx.android.lib.network.model.PortStatus;
+import br.com.alexpfx.android.lib.network.model.ThreadExecutor;
+import br.com.alexpfx.android.lib.network.model.scan.usecases.CheckPortUseCase;
+import br.com.alexpfx.android.lib.network.model.scan.usecases.PortScannerUseCase;
+import br.com.alexpfx.android.lib.network.model.scan.usecases.ScanResult;
 
 import java.net.InetAddress;
 import java.util.ArrayList;
@@ -52,7 +55,7 @@ public class RangePortScannerUseCaseImpl implements PortScannerUseCase, CheckPor
     }
 
     @Override
-    public void onResult(PortScanResult scanResult) {
+    public void onResult(ScanResult scanResult) {
         synchronized (this) {
             totalScanned++;
             callback.onUpdateStatus((double) totalScanned * 100d / numberOfPorts);

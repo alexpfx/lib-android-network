@@ -1,4 +1,4 @@
-package br.com.alexpfx.android.lib.network.domain;
+package br.com.alexpfx.android.lib.network.model;
 
 import android.content.Context;
 import android.net.wifi.WifiInfo;

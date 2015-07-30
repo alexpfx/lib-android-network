@@ -1,13 +1,13 @@
-package br.com.alexpfx.android.lib.network.domain.scan.usecases;
+package br.com.alexpfx.android.lib.network.model.scan.usecases;
 
-import br.com.alexpfx.android.lib.network.domain.PortStatus;
+import br.com.alexpfx.android.lib.network.model.PortStatus;
 
 import java.net.InetAddress;
 
 /**
  * Created by alexandre on 29/07/15.
  */
-public interface PortScanResult {
+public interface ScanResult {
 
     PortStatus getPortStatus();
 

@@ -1,7 +1,10 @@
-package br.com.alexpfx.android.lib.network.domain.scan.usecases;
+package br.com.alexpfx.android.lib.network.model.scan.usecases.impl;
 
-import br.com.alexpfx.android.lib.network.domain.PortStatus;
-import br.com.alexpfx.android.lib.network.domain.ThreadExecutor;
+import br.com.alexpfx.android.lib.network.model.PortStatus;
+import br.com.alexpfx.android.lib.network.model.ThreadExecutor;
+import br.com.alexpfx.android.lib.network.model.scan.usecases.CheckPortUseCase;
+import br.com.alexpfx.android.lib.network.model.scan.usecases.NetworkScannerUseCase;
+import br.com.alexpfx.android.lib.network.model.scan.usecases.ScanResult;
 
 import java.net.InetAddress;
 import java.util.List;
@@ -28,7 +31,7 @@ public class NetworkScannerUseCaseImpl implements NetworkScannerUseCase, CheckPo
     }
 
     @Override
-    public void onResult(PortScanResult scanResult) {
+    public void onResult(ScanResult scanResult) {
         if (PortStatus.OPEN.equals(scanResult.getPortStatus())) {
             System.out.println(scanResult.getPortStatus());
             System.out.println(port);
