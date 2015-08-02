@@ -41,6 +41,7 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
     private Button btnPortScanRange;
     private Button btnWifiScan;
     private long beforeScan;
+
     private WifiScanResultBroadcastReceiver wifiScanResultBroadcastReceiver;
     private ConnectionUpdateReceiver connectionUpdateReceiver;
     private WifiNetworkManager wifiNetworkManager;
