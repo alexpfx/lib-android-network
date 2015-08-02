@@ -181,7 +181,7 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
         unregisterReceiver(connectionUpdateReceiver);
         super.onPause();
     }
-
+    //teste
 
     @Subscribe
     public void onScanResultReceived(WifiList list) {
