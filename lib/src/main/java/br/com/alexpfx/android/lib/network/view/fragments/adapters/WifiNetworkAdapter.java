@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import br.com.alexpfx.android.lib.network.R;
-import br.com.alexpfx.android.lib.network.receivers.WifiInfo;
+import br.com.alexpfx.android.lib.network.domain.WifiInfo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +14,11 @@ import java.util.List;
 /**
  * Created by alexandre on 02/08/2015.
  */
-public class WifiNetworkAdapter extends RecyclerView.Adapter<WifiNetworkAdapter.ViewHolder> {
+public class WifiNetworkAdapter extends RecyclerView.Adapter<WifiNetworkAdapter.ViewHolder> implements RecyclerViewAdapter<WifiInfo> {
 
     private List<ViewModel> list = new ArrayList<>();
 
-    public void addWifi (WifiInfo info){
+    public void add(WifiInfo info) {
         ViewModel viewModel = new ViewModel();
         viewModel.authType = info.getCapabilities();
         viewModel.mac = info.getBssid();
@@ -57,7 +57,6 @@ public class WifiNetworkAdapter extends RecyclerView.Adapter<WifiNetworkAdapter.
 
         }
     }
-
 
     class ViewModel {
         String ssdi;
