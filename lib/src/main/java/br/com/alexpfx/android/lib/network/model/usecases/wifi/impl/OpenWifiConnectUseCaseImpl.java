@@ -2,9 +2,9 @@ package br.com.alexpfx.android.lib.network.model.usecases.wifi.impl;
 
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
+import br.com.alexpfx.android.lib.network.domain.WifiInfo;
 import br.com.alexpfx.android.lib.network.model.ThreadExecutor;
 import br.com.alexpfx.android.lib.network.model.usecases.wifi.WifiConnectUseCase;
-import br.com.alexpfx.android.lib.network.receivers.WifiInfo;
 
 /**
  * Created by alexandre on 29/07/15.

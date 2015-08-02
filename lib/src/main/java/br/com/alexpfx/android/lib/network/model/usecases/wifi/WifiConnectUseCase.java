@@ -1,8 +1,8 @@
 package br.com.alexpfx.android.lib.network.model.usecases.wifi;
 
+import br.com.alexpfx.android.lib.network.domain.WifiInfo;
 import br.com.alexpfx.android.lib.network.model.Interactor;
 import br.com.alexpfx.android.lib.network.model.ThreadExecutor;
-import br.com.alexpfx.android.lib.network.receivers.WifiInfo;
 
 /**
  * Created by alexandre on 29/07/15.

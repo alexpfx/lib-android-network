@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import br.com.alexpfx.android.lib.network.domain.WifiInfo;
+import br.com.alexpfx.android.lib.network.domain.WifiList;
 import br.com.alexpfx.android.lib.network.model.ThreadExecutor;
 import br.com.alexpfx.android.lib.network.model.WifiNetworkManager;
 import br.com.alexpfx.android.lib.network.model.usecases.portscan.NetworkScannerUseCase;
@@ -19,11 +21,9 @@ import br.com.alexpfx.android.lib.network.model.usecases.portscan.impl.RangePort
 import br.com.alexpfx.android.lib.network.model.usecases.wifi.WifiConnectUseCase;
 import br.com.alexpfx.android.lib.network.model.usecases.wifi.impl.OpenWifiConnectUseCaseImpl;
 import br.com.alexpfx.android.lib.network.receivers.ConnectionUpdateReceiver;
-import br.com.alexpfx.android.lib.network.receivers.WifiInfo;
-import br.com.alexpfx.android.lib.network.receivers.WifiList;
 import br.com.alexpfx.android.lib.network.receivers.WifiScanResultBroadcastReceiver;
 import br.com.alexpfx.android.lib.network.utils.IpUtils;
-import br.com.alexpfx.android.lib.network.view.fragments.WifiNetworksFragment;
+import br.com.alexpfx.android.lib.network.view.fragments.WifiNetworkFragment;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
@@ -52,6 +52,7 @@ public class NetworkMainActivity extends AppCompatActivity implements NetworkSca
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_network_main);
         wifiNetworkManager = new WifiNetworkManager(getWifiManagerService());
+
 
         btnNetworkscan = (Button) getView(R.id.btnScan);
         btnNetworkscan.setOnClickListener(new View.OnClickListener() {
@@ -84,7 +85,7 @@ public class NetworkMainActivity extends AppCompatActivity implements NetworkSca
         connectionUpdateReceiver.setListener(this);
 
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.main_content, new WifiNetworksFragment());
+        fragmentTransaction.replace(R.id.main_content, new WifiNetworkFragment());
         fragmentTransaction.commit();
 
     }

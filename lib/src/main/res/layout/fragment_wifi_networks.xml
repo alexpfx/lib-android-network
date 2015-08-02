@@ -1,16 +1,26 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="br.com.alexpfx.android.lib.network.view.fragments.WifiNetworksFragment">
+              android:orientation="vertical"
+              tools:context="br.com.alexpfx.android.lib.network.view.fragments.WifiNetworkFragment"
+    >
+
+    <Button
+        android:id="@+id/btnPress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Press"
+        />
+
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvWifiNetworks"
-        android:scrollbars="vertical"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:scrollbars="vertical"
         >
 
     </android.support.v7.widget.RecyclerView>
 
-</FrameLayout>
+</LinearLayout>

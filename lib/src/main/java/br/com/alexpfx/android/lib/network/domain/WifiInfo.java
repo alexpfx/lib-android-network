@@ -1,4 +1,4 @@
-package br.com.alexpfx.android.lib.network.receivers;
+package br.com.alexpfx.android.lib.network.domain;
 
 import android.net.wifi.ScanResult;
 import android.os.Build;
@@ -24,6 +24,7 @@ public class WifiInfo {
         this.level = level;
         this.timestamp = timestamp;
     }
+
 
     public static WifiInfo fromScanResult(ScanResult scanResult) {
         String capabilities = scanResult.capabilities;

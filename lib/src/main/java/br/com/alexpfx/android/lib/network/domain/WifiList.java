@@ -1,4 +1,4 @@
-package br.com.alexpfx.android.lib.network.receivers;
+package br.com.alexpfx.android.lib.network.domain;
 
 
 import br.com.alexpfx.android.lib.network.model.WifiSecurityMode;
