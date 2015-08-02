@@ -1,12 +1,11 @@
 package br.com.alexpfx.android.lib.network;
 
-import android.content.ComponentName;
+import android.app.FragmentTransaction;
 import android.content.IntentFilter;
-import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
-import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -24,6 +23,7 @@ import br.com.alexpfx.android.lib.network.receivers.WifiInfo;
 import br.com.alexpfx.android.lib.network.receivers.WifiList;
 import br.com.alexpfx.android.lib.network.receivers.WifiScanResultBroadcastReceiver;
 import br.com.alexpfx.android.lib.network.utils.IpUtils;
+import br.com.alexpfx.android.lib.network.view.fragments.WifiNetworksFragment;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
 
@@ -33,8 +33,8 @@ import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-//TODO: essa eh uma activity para testes. para implementações oficiais usar fragmentos.
-public class NetworkMainActivity extends ActionBarActivity implements NetworkScannerUseCase.Callback, PortScannerUseCase.Callback, WifiConnectUseCase.Callback, ConnectionUpdateReceiver.Listener {
+//TODO: essa eh uma activity para testes. para implementacoes oficiais usar fragmentos.
+public class NetworkMainActivity extends AppCompatActivity implements NetworkScannerUseCase.Callback, PortScannerUseCase.Callback, WifiConnectUseCase.Callback, ConnectionUpdateReceiver.Listener {
 
 
     private Button btnNetworkscan;
@@ -83,6 +83,9 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
         connectionUpdateReceiver = new ConnectionUpdateReceiver();
         connectionUpdateReceiver.setListener(this);
 
+        FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
+        fragmentTransaction.replace(R.id.main_content, new WifiNetworksFragment());
+        fragmentTransaction.commit();
 
     }
 
@@ -188,7 +191,7 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
         final List<WifiInfo> openWifis = list.getOpenWifis();
         for (WifiInfo w : openWifis) {
             //TODO: nao pode conectar sequencial assim, deve-se  criar um pool de redes abertas e ir fazendo
-            //o ciclo completo de conexão uma por uma.
+            //o ciclo completo de conexao uma por uma.
             WifiConnectUseCase connectUseCase = new OpenWifiConnectUseCaseImpl(getWifiManagerService());
             connectUseCase.execute(new ThreadExecutor(2), w, this);
         }
@@ -211,4 +214,6 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
         System.out.println("onWifiConnected");
 
     }
+
+
 }
