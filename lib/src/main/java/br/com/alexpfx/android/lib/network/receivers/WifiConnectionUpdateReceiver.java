@@ -11,7 +11,7 @@ import android.net.wifi.WifiManager;
 /**
  * Created by alexandre on 30/07/15.
  */
-public class ConnectionUpdateReceiver extends BroadcastReceiver {
+public class WifiConnectionUpdateReceiver extends BroadcastReceiver {
 
 
     private Listener listener;

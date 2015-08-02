@@ -21,7 +21,7 @@ import br.com.alexpfx.android.lib.network.model.usecases.portscan.impl.NetworkSc
 import br.com.alexpfx.android.lib.network.model.usecases.portscan.impl.RangePortScannerUseCaseImpl;
 import br.com.alexpfx.android.lib.network.model.usecases.wifi.WifiConnectUseCase;
 import br.com.alexpfx.android.lib.network.model.usecases.wifi.impl.OpenWifiConnectUseCaseImpl;
-import br.com.alexpfx.android.lib.network.receivers.ConnectionUpdateReceiver;
+import br.com.alexpfx.android.lib.network.receivers.WifiConnectionUpdateReceiver;
 import br.com.alexpfx.android.lib.network.receivers.WifiScanResultBroadcastReceiver;
 import br.com.alexpfx.android.lib.network.utils.IpUtils;
 import br.com.alexpfx.android.lib.network.view.fragments.WifiNetworkFragment;
@@ -35,7 +35,7 @@ import java.util.concurrent.TimeUnit;
 
 
 //TODO: essa eh uma activity para testes. para implementacoes oficiais usar fragmentos.
-public class NetworkMainActivity extends AppCompatActivity implements NetworkScannerUseCase.Callback, PortScannerUseCase.Callback, WifiConnectUseCase.Callback, ConnectionUpdateReceiver.Listener {
+public class NetworkMainActivity extends AppCompatActivity implements NetworkScannerUseCase.Callback, PortScannerUseCase.Callback, WifiConnectUseCase.Callback, WifiConnectionUpdateReceiver.Listener {
 
 
     private Button btnNetworkscan;
@@ -44,7 +44,7 @@ public class NetworkMainActivity extends AppCompatActivity implements NetworkSca
     private long beforeScan;
 
     private WifiScanResultBroadcastReceiver wifiScanResultBroadcastReceiver;
-    private ConnectionUpdateReceiver connectionUpdateReceiver;
+    private WifiConnectionUpdateReceiver wifiConnectionUpdateReceiver;
     private WifiNetworkManager wifiNetworkManager;
 
 
@@ -82,8 +82,8 @@ public class NetworkMainActivity extends AppCompatActivity implements NetworkSca
         final Bus bus = new Bus();
         bus.register(this);
         wifiScanResultBroadcastReceiver = new WifiScanResultBroadcastReceiver(bus);
-        connectionUpdateReceiver = new ConnectionUpdateReceiver();
-        connectionUpdateReceiver.setListener(this);
+        wifiConnectionUpdateReceiver = new WifiConnectionUpdateReceiver();
+        wifiConnectionUpdateReceiver.setListener(this);
 
         FragmentTransaction fragmentTransaction = getFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.main_content, new WifiNetworkFragment());
@@ -176,14 +176,14 @@ public class NetworkMainActivity extends AppCompatActivity implements NetworkSca
     @Override
     protected void onResume() {
         registerReceiver(wifiScanResultBroadcastReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
-        registerReceiver(connectionUpdateReceiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+        registerReceiver(wifiConnectionUpdateReceiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
         super.onResume();
     }
 
     @Override
     protected void onPause() {
         unregisterReceiver(wifiScanResultBroadcastReceiver);
-        unregisterReceiver(connectionUpdateReceiver);
+        unregisterReceiver(wifiConnectionUpdateReceiver);
         super.onPause();
     }
     //test

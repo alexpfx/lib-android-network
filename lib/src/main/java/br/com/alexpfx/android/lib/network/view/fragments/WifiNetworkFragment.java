@@ -11,19 +11,19 @@ import android.view.View;
 import android.view.ViewGroup;
 import br.com.alexpfx.android.lib.network.R;
 import br.com.alexpfx.android.lib.network.domain.WifiNetwork;
-import br.com.alexpfx.android.lib.network.receivers.ConnectionUpdateReceiver;
+import br.com.alexpfx.android.lib.network.receivers.WifiConnectionUpdateReceiver;
 import br.com.alexpfx.android.lib.network.view.common.Views;
 import br.com.alexpfx.android.lib.network.view.fragments.adapters.RecyclerViewAdapter;
 import br.com.alexpfx.android.lib.network.view.fragments.adapters.WifiNetworkAdapter;
 
-public class WifiNetworkFragment extends Fragment implements ConnectionUpdateReceiver.Listener {
+public class WifiNetworkFragment extends Fragment implements WifiConnectionUpdateReceiver.Listener {
 
     private RecyclerView rvWifiNetworks;
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerViewAdapter<WifiNetwork> adapter;
 //    private RecyclerViewAdapter <WifiInfo> ad;
 
-    private ConnectionUpdateReceiver connectionUpdateReceiver;
+    private WifiConnectionUpdateReceiver wifiConnectionUpdateReceiver;
 
 
     public WifiNetworkFragment() {
@@ -36,8 +36,8 @@ public class WifiNetworkFragment extends Fragment implements ConnectionUpdateRec
 
         View view = inflater.inflate(R.layout.fragment_wifi_networks, container, false);
         setupRecyclerView(view);
-        connectionUpdateReceiver = new ConnectionUpdateReceiver();
-        connectionUpdateReceiver.setListener(this);
+        wifiConnectionUpdateReceiver = new WifiConnectionUpdateReceiver();
+        wifiConnectionUpdateReceiver.setListener(this);
 
 
         return view;
