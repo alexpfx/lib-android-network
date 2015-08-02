@@ -207,6 +207,7 @@ public class NetworkMainActivity extends ActionBarActivity implements NetworkSca
 
     @Override
     public void onWifiConnected(NetworkInfo networkInfo) {
+        System.out.println("onWifiConnected");
 
     }
 }
