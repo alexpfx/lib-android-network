@@ -9,7 +9,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import br.com.alexpfx.android.lib.network.R;
-import br.com.alexpfx.android.lib.network.domain.WifiInfo;
+import br.com.alexpfx.android.lib.network.domain.WifiNetwork;
 import br.com.alexpfx.android.lib.network.receivers.ConnectionUpdateReceiver;
 import br.com.alexpfx.android.lib.network.view.common.Views;
 import br.com.alexpfx.android.lib.network.view.fragments.adapters.RecyclerViewAdapter;
@@ -19,7 +19,7 @@ public class WifiNetworkFragment extends Fragment implements ConnectionUpdateRec
 
     private RecyclerView rvWifiNetworks;
     private RecyclerView.LayoutManager layoutManager;
-    private RecyclerViewAdapter<WifiInfo> adapter;
+    private RecyclerViewAdapter<WifiNetwork> adapter;
 //    private RecyclerViewAdapter <WifiInfo> ad;
 
     private ConnectionUpdateReceiver connectionUpdateReceiver;

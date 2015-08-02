@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
-import br.com.alexpfx.android.lib.network.domain.WifiInfo;
 import br.com.alexpfx.android.lib.network.domain.WifiList;
+import br.com.alexpfx.android.lib.network.domain.WifiNetwork;
 import com.squareup.otto.Bus;
 
 import java.util.List;
@@ -28,8 +28,8 @@ public class WifiScanResultBroadcastReceiver extends BroadcastReceiver {
 
         WifiList wifiList = new WifiList();
         for (ScanResult result : scanResults) {
-            WifiInfo wifiInfo = WifiInfo.fromScanResult(result);
-            wifiList.add(wifiInfo);
+            WifiNetwork wifiNetwork = WifiNetwork.fromScanResult(result);
+            wifiList.add(wifiNetwork);
         }
         post(wifiList);
     }

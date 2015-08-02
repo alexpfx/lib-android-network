@@ -10,8 +10,8 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import br.com.alexpfx.android.lib.network.domain.WifiInfo;
 import br.com.alexpfx.android.lib.network.domain.WifiList;
+import br.com.alexpfx.android.lib.network.domain.WifiNetwork;
 import br.com.alexpfx.android.lib.network.model.ThreadExecutor;
 import br.com.alexpfx.android.lib.network.model.WifiNetworkManager;
 import br.com.alexpfx.android.lib.network.model.usecases.portscan.NetworkScannerUseCase;
@@ -189,8 +189,8 @@ public class NetworkMainActivity extends AppCompatActivity implements NetworkSca
 
     @Subscribe
     public void onScanResultReceived(WifiList list) {
-        final List<WifiInfo> openWifis = list.getOpenWifis();
-        for (WifiInfo w : openWifis) {
+        final List<WifiNetwork> openWifis = list.getOpenWifis();
+        for (WifiNetwork w : openWifis) {
             //TODO: nao pode conectar sequencial assim, deve-se  criar um pool de redes abertas e ir fazendo
             //o ciclo completo de conexao uma por uma.
             WifiConnectUseCase connectUseCase = new OpenWifiConnectUseCaseImpl(getWifiManagerService());
@@ -199,13 +199,13 @@ public class NetworkMainActivity extends AppCompatActivity implements NetworkSca
     }
 
     @Override
-    public void onWifiConnectionSuccess(int netId, WifiInfo wifiInfo) {
+    public void onWifiConnectionSuccess(int netId, WifiNetwork wifiNetwork) {
         //
         System.out.println(netId);
     }
 
     @Override
-    public void onWifiConnectionFailure(int netId, WifiInfo wifiInfo) {
+    public void onWifiConnectionFailure(int netId, WifiNetwork wifiNetwork) {
         System.out.println(netId);
     }
 

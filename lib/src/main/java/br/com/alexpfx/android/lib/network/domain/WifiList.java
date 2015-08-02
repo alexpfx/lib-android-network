@@ -12,25 +12,25 @@ import java.util.List;
  */
 public class WifiList {
 
-    private List<WifiInfo> wifiInfoList = new ArrayList<>();
+    private List<WifiNetwork> wifiNetworkList = new ArrayList<>();
 
-    public void add(WifiInfo wifiInfo) {
-        wifiInfoList.add(wifiInfo);
+    public void add(WifiNetwork wifiNetwork) {
+        wifiNetworkList.add(wifiNetwork);
     }
 
-    public Iterator<WifiInfo> iterator() {
-        return wifiInfoList.iterator();
+    public Iterator<WifiNetwork> iterator() {
+        return wifiNetworkList.iterator();
     }
 
-    public List<WifiInfo> getOpenWifis() {
-        List<WifiInfo> open = new ArrayList<>();
-        for (WifiInfo wifiInfo : wifiInfoList) {
-            if (wifiInfo.testAgainstSecurityModes(
+    public List<WifiNetwork> getOpenWifis() {
+        List<WifiNetwork> open = new ArrayList<>();
+        for (WifiNetwork wifiNetwork : wifiNetworkList) {
+            if (wifiNetwork.testAgainstSecurityModes(
                     WifiSecurityMode.WEP,
                     WifiSecurityMode.WPA,
                     WifiSecurityMode.WPA2)
                     .equals(WifiSecurityMode.UNKNOWN)) {
-                open.add(wifiInfo);
+                open.add(wifiNetwork);
             }
         }
         return open;

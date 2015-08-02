@@ -7,7 +7,7 @@ import br.com.alexpfx.android.lib.network.model.WifiSecurityMode;
 /**
  * Created by alexandre on 29/07/15.
  */
-public class WifiInfo {
+public class WifiNetwork {
 
     private final String capabilities;
     private final String ssid;
@@ -16,7 +16,7 @@ public class WifiInfo {
     private final int level;
     private long timestamp = 0L;
 
-    public WifiInfo(String capabilities, String ssid, String bssid, int frequency, int level, long timestamp) {
+    public WifiNetwork(String capabilities, String ssid, String bssid, int frequency, int level, long timestamp) {
         this.capabilities = capabilities;
         this.ssid = ssid;
         this.bssid = bssid;
@@ -26,7 +26,7 @@ public class WifiInfo {
     }
 
 
-    public static WifiInfo fromScanResult(ScanResult scanResult) {
+    public static WifiNetwork fromScanResult(ScanResult scanResult) {
         String capabilities = scanResult.capabilities;
         String ssid = scanResult.SSID;
         String bssid = scanResult.BSSID;
@@ -36,7 +36,7 @@ public class WifiInfo {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.JELLY_BEAN_MR2) {
             timestamp = scanResult.timestamp;
         }
-        return new WifiInfo(capabilities, ssid, bssid, frequency, level, timestamp);
+        return new WifiNetwork(capabilities, ssid, bssid, frequency, level, timestamp);
     }
 
     public String getCapabilities() {

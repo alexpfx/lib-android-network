@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import br.com.alexpfx.android.lib.network.R;
-import br.com.alexpfx.android.lib.network.domain.WifiInfo;
+import br.com.alexpfx.android.lib.network.domain.WifiNetwork;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -14,11 +14,11 @@ import java.util.List;
 /**
  * Created by alexandre on 02/08/2015.
  */
-public class WifiNetworkAdapter extends RecyclerView.Adapter<WifiNetworkAdapter.ViewHolder> implements RecyclerViewAdapter<WifiInfo> {
+public class WifiNetworkAdapter extends RecyclerView.Adapter<WifiNetworkAdapter.ViewHolder> implements RecyclerViewAdapter<WifiNetwork> {
 
     private List<ViewModel> list = new ArrayList<>();
 
-    public void add(WifiInfo info) {
+    public void add(WifiNetwork info) {
         ViewModel viewModel = new ViewModel();
         viewModel.authType = info.getCapabilities();
         viewModel.mac = info.getBssid();

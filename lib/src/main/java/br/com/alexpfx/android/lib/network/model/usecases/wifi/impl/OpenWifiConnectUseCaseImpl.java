@@ -2,7 +2,7 @@ package br.com.alexpfx.android.lib.network.model.usecases.wifi.impl;
 
 import android.net.wifi.WifiConfiguration;
 import android.net.wifi.WifiManager;
-import br.com.alexpfx.android.lib.network.domain.WifiInfo;
+import br.com.alexpfx.android.lib.network.domain.WifiNetwork;
 import br.com.alexpfx.android.lib.network.model.ThreadExecutor;
 import br.com.alexpfx.android.lib.network.model.usecases.wifi.WifiConnectUseCase;
 
@@ -14,7 +14,7 @@ public class OpenWifiConnectUseCaseImpl implements WifiConnectUseCase {
 
     WifiManager wifiManager;
     private int netId;
-    private WifiInfo wifiInfo;
+    private WifiNetwork wifiNetwork;
     private Callback callback;
 
     public OpenWifiConnectUseCaseImpl(WifiManager wifiManager) {
@@ -22,11 +22,11 @@ public class OpenWifiConnectUseCaseImpl implements WifiConnectUseCase {
     }
 
     @Override
-    public void execute(ThreadExecutor threadExecutor, WifiInfo wifiInfo, Callback callback) {
-        this.wifiInfo = wifiInfo;
+    public void execute(ThreadExecutor threadExecutor, WifiNetwork wifiNetwork, Callback callback) {
+        this.wifiNetwork = wifiNetwork;
         this.callback = callback;
         WifiConfiguration wifiConfiguration = new WifiConfiguration();
-        wifiConfiguration.SSID = wifiInfo.getSsid();
+        wifiConfiguration.SSID = wifiNetwork.getSsid();
         wifiConfiguration.allowedKeyManagement.set(WifiConfiguration.KeyMgmt.NONE);
         netId = wifiManager.addNetwork(wifiConfiguration);
 
