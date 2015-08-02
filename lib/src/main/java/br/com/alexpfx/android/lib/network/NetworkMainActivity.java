@@ -3,6 +3,7 @@ package br.com.alexpfx.android.lib.network;
 import android.app.FragmentTransaction;
 import android.content.IntentFilter;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -211,7 +212,7 @@ public class NetworkMainActivity extends AppCompatActivity implements NetworkSca
 
 
     @Override
-    public void onWifiConnected(NetworkInfo networkInfo) {
+    public void onWifiConnected(NetworkInfo networkInfo, WifiInfo wifiInfo) {
         System.out.println("onWifiConnected");
 
     }

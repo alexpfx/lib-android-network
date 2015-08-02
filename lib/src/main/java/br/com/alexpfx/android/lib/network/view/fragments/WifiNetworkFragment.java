@@ -2,6 +2,7 @@ package br.com.alexpfx.android.lib.network.view.fragments;
 
 import android.app.Fragment;
 import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -61,7 +62,7 @@ public class WifiNetworkFragment extends Fragment implements ConnectionUpdateRec
     }
 
     @Override
-    public void onWifiConnected(NetworkInfo networkInfo) {
+    public void onWifiConnected(NetworkInfo networkInfo, WifiInfo wifiInfo) {
 
 
     }

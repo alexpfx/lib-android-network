@@ -23,20 +23,19 @@ public class ConnectionUpdateReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-        final WifiInfo wifiInfo = wifiManager.getConnectionInfo();
 
         NetworkInfo networkInfo = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
-
         if (networkInfo != null && networkInfo.isConnected()) {
             if (listener != null) {
-                listener.onWifiConnected(networkInfo);
+                WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+
+                listener.onWifiConnected(networkInfo, wifiManager.getConnectionInfo());
             }
         }
     }
 
     public interface Listener {
-        void onWifiConnected(NetworkInfo networkInfo);
+        void onWifiConnected(NetworkInfo networkInfo, WifiInfo wifiInfo);
     }
 }
