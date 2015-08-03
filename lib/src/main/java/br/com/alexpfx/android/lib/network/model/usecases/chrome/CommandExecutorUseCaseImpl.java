@@ -26,9 +26,9 @@ public class CommandExecutorUseCaseImpl implements CommandExecutorUseCase {
 
     @Override
     public void run() {
-        String command = commandDescriptor.getCommand();
+
         Map<String, Object> parameters = commandDescriptor.getParameters();
-        JSONRPC2Request r = new JSONRPC2Request(command, parameters);
+        JSONRPC2Request r = new JSONRPC2Request("", parameters);
         try {
             jsonrpc2Session.send(r);
             callback.onCommandExecutionSucceful();
