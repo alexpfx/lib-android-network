@@ -1,6 +1,7 @@
 package br.com.alexpfx.android.lib.network.domain;
 
 import android.net.wifi.ScanResult;
+import android.net.wifi.WifiInfo;
 import android.os.Build;
 import br.com.alexpfx.android.lib.network.model.WifiSecurityMode;
 
@@ -25,6 +26,10 @@ public class WifiNetwork {
         this.timestamp = timestamp;
     }
 
+
+    public static WifiNetwork fromWifiInfo(WifiInfo wifiInfo) {
+        return new WifiNetwork(null, wifiInfo.getSSID(), wifiInfo.getBSSID(), wifiInfo.getFrequency(), wifiInfo.getRssi(), 0L);
+    }
 
     public static WifiNetwork fromScanResult(ScanResult scanResult) {
         String capabilities = scanResult.capabilities;

@@ -176,14 +176,14 @@ public class NetworkMainActivity extends AppCompatActivity implements NetworkSca
     @Override
     protected void onResume() {
         registerReceiver(wifiScanResultBroadcastReceiver, new IntentFilter(WifiManager.SCAN_RESULTS_AVAILABLE_ACTION));
-        registerReceiver(wifiConnectionUpdateReceiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
+//        registerReceiver(wifiConnectionUpdateReceiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
         super.onResume();
     }
 
     @Override
     protected void onPause() {
         unregisterReceiver(wifiScanResultBroadcastReceiver);
-        unregisterReceiver(wifiConnectionUpdateReceiver);
+//        unregisterReceiver(wifiConnectionUpdateReceiver);
         super.onPause();
     }
     //test
