@@ -1,24 +1,27 @@
 package br.com.alexpfx.android.lib.network.model.usecases.chrome;
 
-import java.util.HashMap;
-import java.util.Map;
-
 /**
  * Created by alexandre on 02/08/15.
  */
 public class YoutubeCommandDescriptor implements CommandDescriptor {
 
     private String video;
-    private Map<String, Object> parameters = new HashMap<>();
+    private String parameters;
 
     public YoutubeCommandDescriptor(String video) {
         this.video = video;
-        parameters.put("v", video);
+        parameters = "v=" + video;
+    }
+
+
+    @Override
+    public String getParameters() {
+        return parameters;
     }
 
     @Override
-    public Map<String, Object> getParameters() {
-        return parameters;
+    public String getUrlSufix() {
+        return "/apps/YouTube";
     }
 
 }
