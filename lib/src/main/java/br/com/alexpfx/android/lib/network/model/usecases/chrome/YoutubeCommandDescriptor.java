@@ -13,7 +13,7 @@ public class YoutubeCommandDescriptor implements CommandDescriptor {
 
     public YoutubeCommandDescriptor(String video) {
         this.video = video;
-        parameters.put("p1", "v=" + video);
+        parameters.put("v", video);
     }
 
     @Override

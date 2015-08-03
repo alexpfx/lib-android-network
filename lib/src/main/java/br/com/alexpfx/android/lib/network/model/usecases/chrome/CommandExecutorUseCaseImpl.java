@@ -1,10 +1,11 @@
 package br.com.alexpfx.android.lib.network.model.usecases.chrome;
 
 import br.com.alexpfx.android.lib.network.model.ThreadExecutor;
-import com.thetransactioncompany.jsonrpc2.JSONRPC2Request;
-import com.thetransactioncompany.jsonrpc2.client.JSONRPC2Session;
-import com.thetransactioncompany.jsonrpc2.client.JSONRPC2SessionException;
 
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.HttpURLConnection;
+import java.net.URL;
 import java.util.Map;
 
 /**
@@ -12,37 +13,53 @@ import java.util.Map;
  */
 public class CommandExecutorUseCaseImpl implements CommandExecutorUseCase {
     private ThreadExecutor threadExecutor;
+    private URL url;
     private Command command;
     private CommandParameters commandParameters;
     private Callback callback;
-    private JSONRPC2Session jsonrpc2Session;
     private CommandDescriptor commandDescriptor;
 
-    public CommandExecutorUseCaseImpl(ThreadExecutor threadExecutor, JSONRPC2Session jsonrpc2Session) {
+
+    public CommandExecutorUseCaseImpl(ThreadExecutor threadExecutor, URL url) {
         this.threadExecutor = threadExecutor;
-        this.jsonrpc2Session = jsonrpc2Session;
+
+
+        this.url = url;
     }
 
 
     @Override
     public void run() {
-
         Map<String, Object> parameters = commandDescriptor.getParameters();
-        JSONRPC2Request r = new JSONRPC2Request("", parameters);
         try {
-            jsonrpc2Session.send(r);
-            callback.onCommandExecutionSucceful();
-        } catch (JSONRPC2SessionException e) {
-            callback.onCommandExecutionFailed(e);
+            String urlPar = "v=oHg5SJYRHA0";
+            byte[] postData = urlPar.getBytes();
+            int postLenght = postData.length;
+
+
+            HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
+            urlConnection.setDoOutput(true);
+            urlConnection.setInstanceFollowRedirects(true);
+            urlConnection.setRequestMethod("POST");
+            urlConnection.setRequestProperty("Content-Type", "application/json");
+            urlConnection.setRequestProperty("Content-Length", Integer.toString(postLenght));
+            urlConnection.setUseCaches(false);
+
+            DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
+            wr.write(postData);
+            wr.close();
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
+
     }
 
 
     @Override
     public void execute(CommandDescriptor commandDescriptor, Callback callback) {
-
-
         this.commandDescriptor = commandDescriptor;
         this.callback = callback;
+        threadExecutor.execute(this);
     }
 }
