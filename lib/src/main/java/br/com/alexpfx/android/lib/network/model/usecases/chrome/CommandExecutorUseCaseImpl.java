@@ -6,7 +6,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-import java.util.Map;
 
 /**
  * Created by alexandre on 02/08/15.
@@ -22,21 +21,18 @@ public class CommandExecutorUseCaseImpl implements CommandExecutorUseCase {
 
     public CommandExecutorUseCaseImpl(ThreadExecutor threadExecutor, URL url) {
         this.threadExecutor = threadExecutor;
-
-
         this.url = url;
     }
 
 
     @Override
     public void run() {
-        Map<String, Object> parameters = commandDescriptor.getParameters();
         try {
-            String urlPar = "v=oHg5SJYRHA0";
-            byte[] postData = urlPar.getBytes();
+
+            String urlParameters = "v=oHg5SJYRHA0";
+            byte[] postData = urlParameters.getBytes();
             int postLenght = postData.length;
-
-
+            //url is: new URL("http://192.168.25.99:8008/apps/YouTube")
             HttpURLConnection urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setDoOutput(true);
             urlConnection.setInstanceFollowRedirects(true);
@@ -44,15 +40,13 @@ public class CommandExecutorUseCaseImpl implements CommandExecutorUseCase {
             urlConnection.setRequestProperty("Content-Type", "application/json");
             urlConnection.setRequestProperty("Content-Length", Integer.toString(postLenght));
             urlConnection.setUseCaches(false);
-
             DataOutputStream wr = new DataOutputStream(urlConnection.getOutputStream());
             wr.write(postData);
+            wr.flush();
             wr.close();
-
         } catch (IOException e) {
             e.printStackTrace();
         }
-
     }
 
 
