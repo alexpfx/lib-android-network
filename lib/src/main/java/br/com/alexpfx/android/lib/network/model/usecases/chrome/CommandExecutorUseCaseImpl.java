@@ -44,6 +44,10 @@ public class CommandExecutorUseCaseImpl implements CommandExecutorUseCase {
             wr.write(postData);
             wr.flush();
             wr.close();
+
+            String responseMessage = urlConnection.getResponseMessage();
+            System.out.println(responseMessage);
+
         } catch (IOException e) {
             e.printStackTrace();
         }
