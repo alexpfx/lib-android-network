@@ -43,7 +43,7 @@ public class CommandExecutorUseCaseImpl implements CommandExecutorUseCase {
             wr = new DataOutputStream(urlConnection.getOutputStream());
             wr.write(postData);
             final long responseCode = urlConnection.getResponseCode();
-            if (responseCode == 200) {
+            if (responseCode == HttpURLConnection.HTTP_OK) {
                 callback.onCommandExecutionSucceful();
             } else {
                 notifyError(new RuntimeException("invalid http response"));
