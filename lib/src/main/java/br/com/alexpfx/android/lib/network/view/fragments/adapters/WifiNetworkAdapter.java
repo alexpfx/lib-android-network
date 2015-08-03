@@ -18,6 +18,12 @@ public class WifiNetworkAdapter extends RecyclerView.Adapter<WifiNetworkAdapter.
 
     private List<ViewModel> list = new ArrayList<>();
 
+
+    @Override
+    public void notityDataChanged() {
+        notifyDataSetChanged();
+    }
+
     public void add(WifiNetwork info) {
         ViewModel viewModel = new ViewModel();
         viewModel.authType = info.getCapabilities();
