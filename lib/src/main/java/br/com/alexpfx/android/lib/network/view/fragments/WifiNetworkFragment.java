@@ -26,7 +26,7 @@ public class WifiNetworkFragment extends Fragment {
     private RecyclerView.LayoutManager layoutManager;
     private RecyclerViewAdapter<WifiNetwork> adapter;
 
-    private Button btnPress;
+    private Button btnWifiScan;
 
     private WifiConnectionUpdateReceiver wifiConnectionUpdateReceiver;
     private WifiScanResultBroadcastReceiver wifiScanResultBroadcastReceiver;
@@ -54,8 +54,8 @@ public class WifiNetworkFragment extends Fragment {
     }
 
     private void setupButton(View view) {
-        btnPress = Views.getView(view, R.id.btnPress, Button.class);
-        btnPress.setOnClickListener(new View.OnClickListener() {
+        btnWifiScan = Views.getView(view, R.id.btnStartWifiScan, Button.class);
+        btnWifiScan.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 

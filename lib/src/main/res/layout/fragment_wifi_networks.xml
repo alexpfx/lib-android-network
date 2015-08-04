@@ -7,10 +7,10 @@
     >
 
     <Button
-        android:id="@+id/btnPress"
+        android:id="@+id/btnStartWifiScan"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Press"
+        android:text="Perform Wifi Network Scan"
         />
 
 
