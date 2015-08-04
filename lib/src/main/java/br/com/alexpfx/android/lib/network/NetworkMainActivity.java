@@ -209,6 +209,4 @@ public class NetworkMainActivity extends AppCompatActivity implements NetworkSca
     }
 
 
-
-
 }

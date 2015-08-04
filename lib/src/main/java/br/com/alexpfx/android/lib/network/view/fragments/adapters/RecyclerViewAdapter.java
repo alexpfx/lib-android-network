@@ -6,5 +6,6 @@ package br.com.alexpfx.android.lib.network.view.fragments.adapters;
 public interface RecyclerViewAdapter<T> {
 
     void notityDataChanged();
+
     void add(T value);
 }
