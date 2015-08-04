@@ -14,8 +14,8 @@ public class CommandExecutorUseCaseImpl implements CommandExecutorUseCase {
     private ThreadExecutor threadExecutor;
     private String baseUrl;
     private CommandDescriptor commandDescriptor;
-    private Callback callback;
 
+    private Callback callback;
 
     public CommandExecutorUseCaseImpl(ThreadExecutor threadExecutor) {
         this.threadExecutor = threadExecutor;
