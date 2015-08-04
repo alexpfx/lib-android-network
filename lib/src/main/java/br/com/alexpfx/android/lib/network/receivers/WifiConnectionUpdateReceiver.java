@@ -7,18 +7,15 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import br.com.alexpfx.android.lib.network.utils.BusProvider;
+import com.squareup.otto.Bus;
 
 /**
  * Created by alexandre on 30/07/15.
  */
 public class WifiConnectionUpdateReceiver extends BroadcastReceiver {
 
-
-    private Listener listener;
-
-    public void setListener(Listener listener) {
-        this.listener = listener;
-    }
+    private Bus bus = BusProvider.getInstance();
 
     @Override
     public void onReceive(Context context, Intent intent) {
@@ -27,17 +24,31 @@ public class WifiConnectionUpdateReceiver extends BroadcastReceiver {
         NetworkInfo networkInfo = manager.getNetworkInfo(ConnectivityManager.TYPE_WIFI);
 
         if (networkInfo != null && networkInfo.isConnected()) {
-            if (listener != null) {
-                WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
-
-                final WifiInfo connectionInfo = wifiManager.getConnectionInfo();
-
-                listener.onWifiConnected(networkInfo, wifiManager.getConnectionInfo());
-            }
+            WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
+            final WifiInfo wifiInfo = wifiManager.getConnectionInfo();
+            bus.post(new ConnectionInfo(wifiInfo, networkInfo));
         }
     }
 
-    public interface Listener {
-        void onWifiConnected(NetworkInfo networkInfo, WifiInfo wifiInfo);
+
+    public class ConnectionInfo {
+
+        private WifiInfo wifiInfo;
+        private NetworkInfo networkInfo;
+
+        public ConnectionInfo(WifiInfo wifiInfo, NetworkInfo networkInfo) {
+            this.wifiInfo = wifiInfo;
+            this.networkInfo = networkInfo;
+        }
+
+        public WifiInfo getWifiInfo() {
+            return wifiInfo;
+        }
+
+        public NetworkInfo getNetworkInfo() {
+            return networkInfo;
+        }
     }
+
+
 }
