@@ -87,10 +87,11 @@ public class WifiNetworkFragment extends Fragment {
 
 
     @Subscribe
-    public void receiveConnectionInfo(WifiConnectionUpdateReceiver.ConnectionInfo connectionInfo) {
-        WifiNetwork wifiNetwork = WifiNetwork.fromWifiInfo(connectionInfo.getWifiInfo());
+    public void receiveConnectionInfo(WifiConnectionUpdateReceiver.ConnectionInfoHolder connectionInfoHolder) {
+        WifiNetwork wifiNetwork = WifiNetwork.fromWifiInfo(connectionInfoHolder.getWifiInfo());
         adapter.add(wifiNetwork);
         adapter.notityDataChanged();
     }
+
 
 }

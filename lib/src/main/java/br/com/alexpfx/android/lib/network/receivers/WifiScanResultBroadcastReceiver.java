@@ -32,10 +32,24 @@ public class WifiScanResultBroadcastReceiver extends BroadcastReceiver {
             WifiNetwork wifiNetwork = WifiNetwork.fromScanResult(result);
             wifiList.add(wifiNetwork);
         }
-        post(wifiList);
+        post(new ScanResultHolder(wifiList));
     }
 
-    private void post(WifiList wifiList) {
+    private void post(ScanResultHolder wifiList) {
         bus.post(wifiList);
     }
+
+    public class ScanResultHolder {
+
+        private WifiList wifiList;
+
+        public ScanResultHolder(WifiList wifiList) {
+            this.wifiList = wifiList;
+        }
+
+        public WifiList getWifiList() {
+            return wifiList;
+        }
+    }
+
 }
