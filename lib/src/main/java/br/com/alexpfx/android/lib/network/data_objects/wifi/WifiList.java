@@ -1,7 +1,5 @@
-package br.com.alexpfx.android.lib.network.domain;
+package br.com.alexpfx.android.lib.network.data_objects.wifi;
 
-
-import br.com.alexpfx.android.lib.network.model.WifiSecurityMode;
 
 import java.util.ArrayList;
 import java.util.Iterator;

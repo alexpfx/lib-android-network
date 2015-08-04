@@ -1,6 +1,6 @@
-package br.com.alexpfx.android.lib.network.model.usecases.chrome;
+package br.com.alexpfx.android.lib.network.model.usecases.chromecast;
 
-import br.com.alexpfx.android.lib.network.model.ThreadExecutor;
+import br.com.alexpfx.android.lib.network.utils.ThreadExecutor;
 
 import java.io.DataOutputStream;
 import java.io.IOException;
@@ -32,8 +32,8 @@ public class CommandExecutorUseCaseImpl implements CommandExecutorUseCase {
         DataOutputStream wr = null;
         HttpURLConnection urlConnection = null;
         try {
+            //TODO: por em outra classe.
             url = new URL(baseUrl + commandDescriptor.getUrlSufix());
-
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setInstanceFollowRedirects(true);
             urlConnection.setRequestMethod("POST");

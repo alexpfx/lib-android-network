@@ -5,8 +5,8 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiManager;
-import br.com.alexpfx.android.lib.network.domain.WifiList;
-import br.com.alexpfx.android.lib.network.domain.WifiNetwork;
+import br.com.alexpfx.android.lib.network.data_objects.wifi.WifiList;
+import br.com.alexpfx.android.lib.network.data_objects.wifi.WifiNetwork;
 import com.squareup.otto.Bus;
 
 import java.util.List;

@@ -1,4 +1,4 @@
-package br.com.alexpfx.android.lib.network.view.common;
+package br.com.alexpfx.android.lib.network.view.utils;
 
 import android.view.View;
 

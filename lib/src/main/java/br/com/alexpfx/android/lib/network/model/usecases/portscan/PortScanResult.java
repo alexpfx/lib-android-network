@@ -1,7 +1,7 @@
 package br.com.alexpfx.android.lib.network.model.usecases.portscan;
 
-import br.com.alexpfx.android.lib.network.model.AddressPort;
-import br.com.alexpfx.android.lib.network.model.PortStatus;
+import br.com.alexpfx.android.lib.network.data_objects.AddressPort;
+import br.com.alexpfx.android.lib.network.data_objects.PortStatus;
 
 import java.net.InetAddress;
 

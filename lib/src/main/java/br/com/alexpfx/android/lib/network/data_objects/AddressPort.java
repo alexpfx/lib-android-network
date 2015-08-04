@@ -1,4 +1,4 @@
-package br.com.alexpfx.android.lib.network.model;
+package br.com.alexpfx.android.lib.network.data_objects;
 
 import java.net.InetAddress;
 

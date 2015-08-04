@@ -12,11 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import br.com.alexpfx.android.lib.network.R;
-import br.com.alexpfx.android.lib.network.domain.WifiNetwork;
+import br.com.alexpfx.android.lib.network.data_objects.wifi.WifiNetwork;
 import br.com.alexpfx.android.lib.network.receivers.WifiConnectionUpdateReceiver;
-import br.com.alexpfx.android.lib.network.view.common.Views;
+import br.com.alexpfx.android.lib.network.receivers.WifiScanResultBroadcastReceiver;
 import br.com.alexpfx.android.lib.network.view.fragments.adapters.RecyclerViewAdapter;
 import br.com.alexpfx.android.lib.network.view.fragments.adapters.WifiNetworkAdapter;
+import br.com.alexpfx.android.lib.network.view.utils.Views;
 
 public class WifiNetworkFragment extends Fragment implements WifiConnectionUpdateReceiver.Listener {
 
@@ -25,12 +26,13 @@ public class WifiNetworkFragment extends Fragment implements WifiConnectionUpdat
     private RecyclerViewAdapter<WifiNetwork> adapter;
 
     private Button btnPress;
-//    private RecyclerViewAdapter <WifiInfo> ad;
 
     private WifiConnectionUpdateReceiver wifiConnectionUpdateReceiver;
+    private WifiScanResultBroadcastReceiver wifiScanResultBroadcastReceiver;
 
 
     public WifiNetworkFragment() {
+
     }
 
 
@@ -44,7 +46,6 @@ public class WifiNetworkFragment extends Fragment implements WifiConnectionUpdat
         wifiConnectionUpdateReceiver.setListener(this);
 
         setupButton(view);
-
 
         return view;
     }
@@ -70,21 +71,16 @@ public class WifiNetworkFragment extends Fragment implements WifiConnectionUpdat
 
     @Override
     public void onResume() {
-        System.out.println("fragment.onResume");
-
         super.onResume();
     }
 
     @Override
     public void onPause() {
-        System.out.println("fragment.onPause");
-
         super.onPause();
     }
 
     @Override
     public void onStop() {
-        System.out.println("fragment.onStop");
         getActivity().getApplicationContext().unregisterReceiver(wifiConnectionUpdateReceiver);
         super.onStop();
     }
@@ -92,7 +88,6 @@ public class WifiNetworkFragment extends Fragment implements WifiConnectionUpdat
     @Override
     public void onStart() {
         getActivity().getApplicationContext().registerReceiver(wifiConnectionUpdateReceiver, new IntentFilter("android.net.conn.CONNECTIVITY_CHANGE"));
-        System.out.println("fragment.onStart");
         super.onStart();
     }
 
@@ -101,6 +96,5 @@ public class WifiNetworkFragment extends Fragment implements WifiConnectionUpdat
         final WifiNetwork wifiNetwork = WifiNetwork.fromWifiInfo(wifiInfo);
         adapter.add(wifiNetwork);
         adapter.notityDataChanged();
-
     }
 }

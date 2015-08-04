@@ -1,4 +1,6 @@
-package br.com.alexpfx.android.lib.network.model;
+package br.com.alexpfx.android.lib.network.utils;
+
+import br.com.alexpfx.android.lib.network.model.Interactor;
 
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;

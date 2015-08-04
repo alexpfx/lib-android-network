@@ -1,4 +1,4 @@
-package br.com.alexpfx.android.lib.network.model.usecases.chrome;
+package br.com.alexpfx.android.lib.network.model.usecases.chromecast;
 
 import br.com.alexpfx.android.lib.network.model.Interactor;
 

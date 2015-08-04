@@ -1,9 +1,8 @@
-package br.com.alexpfx.android.lib.network.domain;
+package br.com.alexpfx.android.lib.network.data_objects.wifi;
 
 import android.net.wifi.ScanResult;
 import android.net.wifi.WifiInfo;
 import android.os.Build;
-import br.com.alexpfx.android.lib.network.model.WifiSecurityMode;
 
 /**
  * Created by alexandre on 29/07/15.

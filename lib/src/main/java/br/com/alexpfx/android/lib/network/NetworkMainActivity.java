@@ -11,19 +11,19 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import br.com.alexpfx.android.lib.network.domain.WifiList;
-import br.com.alexpfx.android.lib.network.domain.WifiNetwork;
-import br.com.alexpfx.android.lib.network.model.ThreadExecutor;
+import br.com.alexpfx.android.lib.network.data_objects.wifi.WifiList;
+import br.com.alexpfx.android.lib.network.data_objects.wifi.WifiNetwork;
 import br.com.alexpfx.android.lib.network.model.WifiNetworkManager;
 import br.com.alexpfx.android.lib.network.model.usecases.portscan.NetworkScannerUseCase;
+import br.com.alexpfx.android.lib.network.model.usecases.portscan.NetworkScannerUseCaseImpl;
 import br.com.alexpfx.android.lib.network.model.usecases.portscan.PortScannerUseCase;
-import br.com.alexpfx.android.lib.network.model.usecases.portscan.impl.NetworkScannerUseCaseImpl;
-import br.com.alexpfx.android.lib.network.model.usecases.portscan.impl.RangePortScannerUseCaseImpl;
+import br.com.alexpfx.android.lib.network.model.usecases.portscan.RangePortScannerUseCaseImpl;
+import br.com.alexpfx.android.lib.network.model.usecases.wifi.OpenWifiConnectUseCaseImpl;
 import br.com.alexpfx.android.lib.network.model.usecases.wifi.WifiConnectUseCase;
-import br.com.alexpfx.android.lib.network.model.usecases.wifi.impl.OpenWifiConnectUseCaseImpl;
 import br.com.alexpfx.android.lib.network.receivers.WifiConnectionUpdateReceiver;
 import br.com.alexpfx.android.lib.network.receivers.WifiScanResultBroadcastReceiver;
 import br.com.alexpfx.android.lib.network.utils.IpUtils;
+import br.com.alexpfx.android.lib.network.utils.ThreadExecutor;
 import br.com.alexpfx.android.lib.network.view.fragments.WifiNetworkFragment;
 import com.squareup.otto.Bus;
 import com.squareup.otto.Subscribe;
@@ -201,8 +201,8 @@ public class NetworkMainActivity extends AppCompatActivity implements NetworkSca
 
     @Override
     public void onWifiConnectionSuccess(int netId, WifiNetwork wifiNetwork) {
-        //
-        System.out.println(netId);
+
+
     }
 
     @Override

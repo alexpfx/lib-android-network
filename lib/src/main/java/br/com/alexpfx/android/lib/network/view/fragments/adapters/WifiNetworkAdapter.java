@@ -6,7 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 import br.com.alexpfx.android.lib.network.R;
-import br.com.alexpfx.android.lib.network.domain.WifiNetwork;
+import br.com.alexpfx.android.lib.network.data_objects.wifi.WifiNetwork;
 
 import java.util.ArrayList;
 import java.util.List;

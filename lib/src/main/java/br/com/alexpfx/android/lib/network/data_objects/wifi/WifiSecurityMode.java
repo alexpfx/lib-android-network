@@ -1,4 +1,4 @@
-package br.com.alexpfx.android.lib.network.model;
+package br.com.alexpfx.android.lib.network.data_objects.wifi;
 
 /**
  * Created by alexandre on 30/07/15.
