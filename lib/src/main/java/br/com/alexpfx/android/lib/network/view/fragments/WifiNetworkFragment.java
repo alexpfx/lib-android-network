@@ -1,7 +1,10 @@
 package br.com.alexpfx.android.lib.network.view.fragments;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.IntentFilter;
+import android.net.NetworkInfo;
+import android.net.wifi.WifiInfo;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -30,7 +33,17 @@ public class WifiNetworkFragment extends Fragment {
 
     private WifiConnectionUpdateReceiver wifiConnectionUpdateReceiver;
     private WifiScanResultBroadcastReceiver wifiScanResultBroadcastReceiver;
+    private FragmentInteractorListener listener;
 
+    @Override
+    public void onAttach(Activity activity) {
+        try {
+            listener = (FragmentInteractorListener) activity;
+        } catch (ClassCastException e) {
+
+        }
+        super.onAttach(activity);
+    }
 
     @Override
     public void onDestroyView() {
@@ -87,9 +100,20 @@ public class WifiNetworkFragment extends Fragment {
 
     @Subscribe
     public void receiveConnectionInfo(WifiConnectionUpdateReceiver.WifiConnectionInfoEvent wifiConnectionInfoEvent) {
+        final NetworkInfo networkInfo = wifiConnectionInfoEvent.getNetworkInfo();
+        final WifiInfo wifiInfo = wifiConnectionInfoEvent.getWifiInfo();
+        if (listener != null) {
+            listener.onWifiReceiver(networkInfo, wifiInfo);
+        }
         WifiNetwork wifiNetwork = WifiNetwork.fromWifiInfo(wifiConnectionInfoEvent.getWifiInfo());
         adapter.add(wifiNetwork);
         adapter.notityDataChanged();
+
+    }
+
+
+    public interface FragmentInteractorListener {
+        void onWifiReceiver(NetworkInfo networkInfo, WifiInfo info);
     }
 
 

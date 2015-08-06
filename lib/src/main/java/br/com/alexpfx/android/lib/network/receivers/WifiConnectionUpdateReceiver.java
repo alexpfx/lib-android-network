@@ -7,6 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
+import br.com.alexpfx.android.lib.base.events.BusEvent;
 import br.com.alexpfx.android.lib.network.utils.BusProvider;
 import com.squareup.otto.Bus;
 
@@ -30,8 +31,7 @@ public class WifiConnectionUpdateReceiver extends BroadcastReceiver {
         }
     }
 
-
-    public class WifiConnectionInfoEvent {
+    public class WifiConnectionInfoEvent implements BusEvent {
 
         private WifiInfo wifiInfo;
         private NetworkInfo networkInfo;
@@ -49,6 +49,5 @@ public class WifiConnectionUpdateReceiver extends BroadcastReceiver {
             return networkInfo;
         }
     }
-
 
 }
