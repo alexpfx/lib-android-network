@@ -26,17 +26,17 @@ public class WifiConnectionUpdateReceiver extends BroadcastReceiver {
         if (networkInfo != null && networkInfo.isConnected()) {
             WifiManager wifiManager = (WifiManager) context.getSystemService(Context.WIFI_SERVICE);
             final WifiInfo wifiInfo = wifiManager.getConnectionInfo();
-            bus.post(new ConnectionInfoHolder(wifiInfo, networkInfo));
+            bus.post(new WifiConnectionInfoEvent(wifiInfo, networkInfo));
         }
     }
 
 
-    public class ConnectionInfoHolder {
+    public class WifiConnectionInfoEvent {
 
         private WifiInfo wifiInfo;
         private NetworkInfo networkInfo;
 
-        public ConnectionInfoHolder(WifiInfo wifiInfo, NetworkInfo networkInfo) {
+        public WifiConnectionInfoEvent(WifiInfo wifiInfo, NetworkInfo networkInfo) {
             this.wifiInfo = wifiInfo;
             this.networkInfo = networkInfo;
         }

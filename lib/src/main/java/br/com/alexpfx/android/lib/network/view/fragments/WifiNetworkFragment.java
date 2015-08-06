@@ -61,7 +61,6 @@ public class WifiNetworkFragment extends Fragment {
 
             }
         });
-
     }
 
     private void setupRecyclerView(View view) {
@@ -87,8 +86,8 @@ public class WifiNetworkFragment extends Fragment {
 
 
     @Subscribe
-    public void receiveConnectionInfo(WifiConnectionUpdateReceiver.ConnectionInfoHolder connectionInfoHolder) {
-        WifiNetwork wifiNetwork = WifiNetwork.fromWifiInfo(connectionInfoHolder.getWifiInfo());
+    public void receiveConnectionInfo(WifiConnectionUpdateReceiver.WifiConnectionInfoEvent wifiConnectionInfoEvent) {
+        WifiNetwork wifiNetwork = WifiNetwork.fromWifiInfo(wifiConnectionInfoEvent.getWifiInfo());
         adapter.add(wifiNetwork);
         adapter.notityDataChanged();
     }
