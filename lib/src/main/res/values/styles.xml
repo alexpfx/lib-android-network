@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+    <style name="NetworkAppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/md_grey_500</item>
         <item name="colorPrimaryDark">@color/md_grey_700</item>
         <item name="colorAccent">@color/md_pink_500</item>
     </style>
 
-    <style name="AppTheme.WithoutActionBar">
+    <style name="NetworkAppTheme.WithoutActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
