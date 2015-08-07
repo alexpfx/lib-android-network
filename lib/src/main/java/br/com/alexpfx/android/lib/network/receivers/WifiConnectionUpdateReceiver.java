@@ -7,7 +7,7 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
-import br.com.alexpfx.android.lib.base.events.BusEvent;
+import br.com.alexpfx.android.lib.base.event.BusEvent;
 import br.com.alexpfx.android.lib.network.utils.BusProvider;
 import com.squareup.otto.Bus;
 

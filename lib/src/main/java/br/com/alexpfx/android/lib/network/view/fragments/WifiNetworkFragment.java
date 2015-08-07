@@ -8,10 +8,12 @@ import android.net.wifi.WifiInfo;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import br.com.alexpfx.android.lib.base.tag.Tags;
 import br.com.alexpfx.android.lib.network.R;
 import br.com.alexpfx.android.lib.network.data_objects.wifi.WifiNetwork;
 import br.com.alexpfx.android.lib.network.receivers.WifiConnectionUpdateReceiver;
@@ -40,7 +42,7 @@ public class WifiNetworkFragment extends Fragment {
         try {
             listener = (FragmentInteractorListener) activity;
         } catch (ClassCastException e) {
-
+            Log.e(Tags.className(), Tags.methodName());
         }
         super.onAttach(activity);
     }
