@@ -42,13 +42,12 @@ android {
 
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    compile project(":lib-android-base")
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     compile "com.android.support:appcompat-v7:$androidSupporLibVersion"
     compile "com.android.support:design:$androidSupporLibVersion"
     compile "com.android.support:cardview-v7:$androidSupporLibVersion"
     compile "com.android.support:recyclerview-v7:$androidSupporLibVersion"
     compile 'com.thetransactioncompany:jsonrpc2-client:1.15'
     compile "com.squareup:otto:$ottoVersion"
-
+    compile project(':..:lib-android-base:lib_base')
 }

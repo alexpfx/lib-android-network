@@ -1,1 +1,1 @@
-include ':lib-android-base', ':lib-android-base:lib', ':lib'
+include ':lib', '..:lib-android-base:lib_base'
