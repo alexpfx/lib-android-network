@@ -1,6 +1,7 @@
 include ':lib'
 include ':base'
-project
+project (':base').projectDir = new File ('../lib-android-base/lib_base/')
+
 
 
 

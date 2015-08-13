@@ -49,5 +49,7 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$androidSupporLibVersion"
     compile 'com.thetransactioncompany:jsonrpc2-client:1.15'
     compile "com.squareup:otto:$ottoVersion"
-    compile project(':..:lib-android-base:lib_base')
+    compile project (':base')
+
+
 }
