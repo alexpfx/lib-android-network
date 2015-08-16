@@ -49,6 +49,8 @@ dependencies {
     compile "com.android.support:recyclerview-v7:$androidSupporLibVersion"
     compile 'com.thetransactioncompany:jsonrpc2-client:1.15'
     compile "com.squareup:otto:$ottoVersion"
+    compile 'com.ircclouds.irc:irc-api:1.0-0014'
+    compile 'com.google.code.gson:gson:2.3.1'
     compile project (':base')
 
 
